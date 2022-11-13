@@ -218,30 +218,26 @@ func infer(c echo.Context) error {
 	// Get the model information
 	modelName := c.FormValue("model")
 	modelVersion := c.FormValue("version")
-	log.Println("1", modelName, modelVersion)
 
 	// Get the file
 	file, err := c.FormFile("file")
 	if err != nil {
 		return err
 	}
-	log.Println("2")
 	fileContent, err := file.Open()
 	if err != nil {
 		return err
 	}
-	log.Println("3")
+	defer fileContent.Close()
 	rawInput, err := ioutil.ReadAll(fileContent)
 	if err != nil {
 		return err
 	}
-	log.Println("4")
 
 	// Create request input / output tensors
 	size := int64(len(rawInput))
-	inferInputs := []*ModelInferRequest_InferInputTensor{{Name: "INPUT0", Datatype: "BYTES", Shape: []int64{size}}}
-	inferOutputs := []*ModelInferRequest_InferRequestedOutputTensor{{Name: "OUTPUT0"}}
-	log.Println("5", size)
+	inferInputs := []*ModelInferRequest_InferInputTensor{{Name: "INPUT", Datatype: "UINT8", Shape: []int64{size}}}
+	inferOutputs := []*ModelInferRequest_InferRequestedOutputTensor{{Name: "OUTPUT"}}
 
 	// Create a request
 	modelInferRequest := ModelInferRequest{
@@ -251,13 +247,11 @@ func infer(c echo.Context) error {
 		Outputs:          inferOutputs,
 		RawInputContents: [][]byte{rawInput},
 	}
-	log.Println("6")
 
 	// Get infer response
 	modelInferResponse, err := client.grpc.ModelInfer(ctx, &modelInferRequest)
 	if err != nil {
 		return err
 	}
-	log.Println("7")
 	return c.JSON(http.StatusOK, modelInferResponse)
 }
