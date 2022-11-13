@@ -569,6 +569,34 @@ paths:
           schema:
             type: boolean
       summary: Healthcheck
+  /infer:
+    post:
+      consumes:
+      - application/json
+      description: It outputs a single bytes with a single bytes input.
+      parameters:
+      - description: model name
+        in: formData
+        name: model
+        required: true
+        type: string
+      - description: input
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: model version
+        in: formData
+        name: version
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Triton server's inference response
+          schema:
+            $ref: '#/definitions/main.ModelInferResponse'
+      summary: Model inference api for the model with bytes a input and a bytes output.
   /liveness:
     get:
       consumes:
@@ -681,32 +709,4 @@ paths:
           schema:
             type: boolean
       summary: Check Triton's Readiness.
-  /simple-infer:
-    post:
-      consumes:
-      - application/json
-      description: It outputs a single bytes with a single bytes input.
-      parameters:
-      - description: model name
-        in: formData
-        name: model
-        required: true
-        type: string
-      - description: input
-        in: formData
-        name: file
-        required: true
-        type: file
-      - description: model version
-        in: formData
-        name: version
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Triton server's inference response
-          schema:
-            $ref: '#/definitions/main.ModelInferResponse'
-      summary: model inference api for the model with bytes a input and a bytes output.
 swagger: "2.0"

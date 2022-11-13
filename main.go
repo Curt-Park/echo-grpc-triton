@@ -8,6 +8,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/swaggo/echo-swagger"
 	"google.golang.org/grpc"
+	"io/ioutil"
 	"log"
 	"net/http" // Package http provides HTTP client and server implementations.
 	"time"
@@ -201,7 +202,7 @@ func unloadModel(c echo.Context) error {
 	return c.JSON(http.StatusOK, modelUnloadResponse)
 }
 
-// @Summary     model inference api for the model with bytes a input and a bytes output.
+// @Summary     Model inference api for the model with bytes a input and a bytes output.
 // @Description It outputs a single bytes with a single bytes input.
 // @Accept      json
 // @Produce     json
@@ -215,22 +216,32 @@ func infer(c echo.Context) error {
 	defer cancel()
 
 	// Get the model information
-	modelName := c.FormValue("name")
+	modelName := c.FormValue("model")
 	modelVersion := c.FormValue("version")
+	log.Println("1", modelName, modelVersion)
+
 	// Get the file
 	file, err := c.FormFile("file")
 	if err != nil {
 		return err
 	}
-	rawInput, err := file.Open()
+	log.Println("2")
+	fileContent, err := file.Open()
 	if err != nil {
 		return err
 	}
-	defer rawInput.Close()
+	log.Println("3")
+	rawInput, err := ioutil.ReadAll(fileContent)
+	if err != nil {
+		return err
+	}
+	log.Println("4")
 
 	// Create request input / output tensors
-	inferInputs := []*ModelInferRequest_InferInputTensor{{Name: "INPUT0", Datatype: "BYTES", Shape: []int64{1, 16}}}
+	size := int64(len(rawInput))
+	inferInputs := []*ModelInferRequest_InferInputTensor{{Name: "INPUT0", Datatype: "BYTES", Shape: []int64{size}}}
 	inferOutputs := []*ModelInferRequest_InferRequestedOutputTensor{{Name: "OUTPUT0"}}
+	log.Println("5", size)
 
 	// Create a request
 	modelInferRequest := ModelInferRequest{
@@ -238,13 +249,15 @@ func infer(c echo.Context) error {
 		ModelVersion:     modelVersion,
 		Inputs:           inferInputs,
 		Outputs:          inferOutputs,
-		RawInputContents: rawInput,
+		RawInputContents: [][]byte{rawInput},
 	}
+	log.Println("6")
 
 	// Get infer response
 	modelInferResponse, err := client.grpc.ModelInfer(ctx, &modelInferRequest)
 	if err != nil {
 		return err
 	}
+	log.Println("7")
 	return c.JSON(http.StatusOK, modelInferResponse)
 }

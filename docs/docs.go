@@ -39,6 +39,48 @@ const docTemplate = `{
                 }
             }
         },
+        "/infer": {
+            "post": {
+                "description": "It outputs a single bytes with a single bytes input.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Model inference api for the model with bytes a input and a bytes output.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "model name",
+                        "name": "model",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "file",
+                        "description": "input",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "model version",
+                        "name": "version",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Triton server's inference response",
+                        "schema": {
+                            "$ref": "#/definitions/main.ModelInferResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/liveness": {
             "get": {
                 "description": "It returns true if the triton server is alive.",
@@ -202,48 +244,6 @@ const docTemplate = `{
                         "description": "Triton server's readiness",
                         "schema": {
                             "type": "boolean"
-                        }
-                    }
-                }
-            }
-        },
-        "/simple-infer": {
-            "post": {
-                "description": "It outputs a single bytes with a single bytes input.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "model inference api for the model with bytes a input and a bytes output.",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "model name",
-                        "name": "model",
-                        "in": "formData",
-                        "required": true
-                    },
-                    {
-                        "type": "file",
-                        "description": "input",
-                        "name": "file",
-                        "in": "formData",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "model version",
-                        "name": "version",
-                        "in": "formData"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Triton server's inference response",
-                        "schema": {
-                            "$ref": "#/definitions/main.ModelInferResponse"
                         }
                     }
                 }
