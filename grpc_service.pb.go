@@ -30,7 +30,7 @@
 // 	protoc        v3.21.9
 // source: grpc_service.proto
 
-package __
+package main
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -49,7 +49,7 @@ const (
 // @@
 // @@.. cpp:var:: message ServerLiveRequest
 // @@
-// @@   Request message for ServerLive.
+// @@ Request message for ServerLive.
 // @@
 type ServerLiveRequest struct {
 	state         protoimpl.MessageState
@@ -92,7 +92,7 @@ func (*ServerLiveRequest) Descriptor() ([]byte, []int) {
 // @@
 // @@.. cpp:var:: message ServerLiveResponse
 // @@
-// @@   Response message for ServerLive.
+// @@ Response message for ServerLive.
 // @@
 type ServerLiveResponse struct {
 	state         protoimpl.MessageState
@@ -100,9 +100,9 @@ type ServerLiveResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: bool live
+	// @@ .. cpp:var:: bool live
 	// @@
-	// @@     True if the inference server is live, false it not live.
+	// @@ True if the inference server is live, false it not live.
 	// @@
 	Live bool `protobuf:"varint,1,opt,name=live,proto3" json:"live,omitempty"`
 }
@@ -149,7 +149,7 @@ func (x *ServerLiveResponse) GetLive() bool {
 // @@
 // @@.. cpp:var:: message ServerReadyRequest
 // @@
-// @@   Request message for ServerReady.
+// @@ Request message for ServerReady.
 // @@
 type ServerReadyRequest struct {
 	state         protoimpl.MessageState
@@ -192,7 +192,7 @@ func (*ServerReadyRequest) Descriptor() ([]byte, []int) {
 // @@
 // @@.. cpp:var:: message ServerReadyResponse
 // @@
-// @@   Response message for ServerReady.
+// @@ Response message for ServerReady.
 // @@
 type ServerReadyResponse struct {
 	state         protoimpl.MessageState
@@ -200,9 +200,9 @@ type ServerReadyResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: bool ready
+	// @@ .. cpp:var:: bool ready
 	// @@
-	// @@     True if the inference server is ready, false it not ready.
+	// @@ True if the inference server is ready, false it not ready.
 	// @@
 	Ready bool `protobuf:"varint,1,opt,name=ready,proto3" json:"ready,omitempty"`
 }
@@ -249,7 +249,7 @@ func (x *ServerReadyResponse) GetReady() bool {
 // @@
 // @@.. cpp:var:: message ModelReadyRequest
 // @@
-// @@   Request message for ModelReady.
+// @@ Request message for ModelReady.
 // @@
 type ModelReadyRequest struct {
 	state         protoimpl.MessageState
@@ -257,15 +257,15 @@ type ModelReadyRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The name of the model to check for readiness.
+	// @@ The name of the model to check for readiness.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// @@  .. cpp:var:: string version
+	// @@ .. cpp:var:: string version
 	// @@
-	// @@     The version of the model to check for readiness. If not given the
-	// @@     server will choose a version based on the model and internal policy.
+	// @@ The version of the model to check for readiness. If not given the
+	// @@ server will choose a version based on the model and internal policy.
 	// @@
 	Version string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 }
@@ -319,7 +319,7 @@ func (x *ModelReadyRequest) GetVersion() string {
 // @@
 // @@.. cpp:var:: message ModelReadyResponse
 // @@
-// @@   Response message for ModelReady.
+// @@ Response message for ModelReady.
 // @@
 type ModelReadyResponse struct {
 	state         protoimpl.MessageState
@@ -327,9 +327,9 @@ type ModelReadyResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: bool ready
+	// @@ .. cpp:var:: bool ready
 	// @@
-	// @@     True if the model is ready, false it not ready.
+	// @@ True if the model is ready, false it not ready.
 	// @@
 	Ready bool `protobuf:"varint,1,opt,name=ready,proto3" json:"ready,omitempty"`
 }
@@ -376,7 +376,7 @@ func (x *ModelReadyResponse) GetReady() bool {
 // @@
 // @@.. cpp:var:: message ServerMetadataRequest
 // @@
-// @@   Request message for ServerMetadata.
+// @@ Request message for ServerMetadata.
 // @@
 type ServerMetadataRequest struct {
 	state         protoimpl.MessageState
@@ -419,7 +419,7 @@ func (*ServerMetadataRequest) Descriptor() ([]byte, []int) {
 // @@
 // @@.. cpp:var:: message ServerMetadataResponse
 // @@
-// @@   Response message for ServerMetadata.
+// @@ Response message for ServerMetadata.
 // @@
 type ServerMetadataResponse struct {
 	state         protoimpl.MessageState
@@ -427,21 +427,21 @@ type ServerMetadataResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The server name.
+	// @@ The server name.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// @@
-	// @@  .. cpp:var:: string version
+	// @@ .. cpp:var:: string version
 	// @@
-	// @@     The server version.
+	// @@ The server version.
 	// @@
 	Version string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	// @@
-	// @@  .. cpp:var:: string extensions (repeated)
+	// @@ .. cpp:var:: string extensions (repeated)
 	// @@
-	// @@     The extensions supported by the server.
+	// @@ The extensions supported by the server.
 	// @@
 	Extensions []string `protobuf:"bytes,3,rep,name=extensions,proto3" json:"extensions,omitempty"`
 }
@@ -502,7 +502,7 @@ func (x *ServerMetadataResponse) GetExtensions() []string {
 // @@
 // @@.. cpp:var:: message ModelMetadataRequest
 // @@
-// @@   Request message for ModelMetadata.
+// @@ Request message for ModelMetadata.
 // @@
 type ModelMetadataRequest struct {
 	state         protoimpl.MessageState
@@ -510,16 +510,16 @@ type ModelMetadataRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The name of the model.
+	// @@ The name of the model.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// @@  .. cpp:var:: string version
+	// @@ .. cpp:var:: string version
 	// @@
-	// @@     The version of the model to check for readiness. If not
-	// @@     given the server will choose a version based on the
-	// @@     model and internal policy.
+	// @@ The version of the model to check for readiness. If not
+	// @@ given the server will choose a version based on the
+	// @@ model and internal policy.
 	// @@
 	Version string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 }
@@ -573,7 +573,7 @@ func (x *ModelMetadataRequest) GetVersion() string {
 // @@
 // @@.. cpp:var:: message ModelMetadataResponse
 // @@
-// @@   Response message for ModelMetadata.
+// @@ Response message for ModelMetadata.
 // @@
 type ModelMetadataResponse struct {
 	state         protoimpl.MessageState
@@ -581,33 +581,33 @@ type ModelMetadataResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The model name.
+	// @@ The model name.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// @@
-	// @@  .. cpp:var:: string versions (repeated)
+	// @@ .. cpp:var:: string versions (repeated)
 	// @@
-	// @@     The versions of the model.
+	// @@ The versions of the model.
 	// @@
 	Versions []string `protobuf:"bytes,2,rep,name=versions,proto3" json:"versions,omitempty"`
 	// @@
-	// @@  .. cpp:var:: string platform
+	// @@ .. cpp:var:: string platform
 	// @@
-	// @@     The model's platform.
+	// @@ The model's platform.
 	// @@
 	Platform string `protobuf:"bytes,3,opt,name=platform,proto3" json:"platform,omitempty"`
 	// @@
-	// @@  .. cpp:var:: TensorMetadata inputs (repeated)
+	// @@ .. cpp:var:: TensorMetadata inputs (repeated)
 	// @@
-	// @@     The model's inputs.
+	// @@ The model's inputs.
 	// @@
 	Inputs []*ModelMetadataResponse_TensorMetadata `protobuf:"bytes,4,rep,name=inputs,proto3" json:"inputs,omitempty"`
 	// @@
-	// @@  .. cpp:var:: TensorMetadata outputs (repeated)
+	// @@ .. cpp:var:: TensorMetadata outputs (repeated)
 	// @@
-	// @@     The model's outputs.
+	// @@ The model's outputs.
 	// @@
 	Outputs []*ModelMetadataResponse_TensorMetadata `protobuf:"bytes,5,rep,name=outputs,proto3" json:"outputs,omitempty"`
 }
@@ -682,17 +682,17 @@ func (x *ModelMetadataResponse) GetOutputs() []*ModelMetadataResponse_TensorMeta
 // @@
 // @@.. cpp:var:: message InferParameter
 // @@
-// @@   An inference parameter value.
+// @@ An inference parameter value.
 // @@
 type InferParameter struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: oneof parameter_choice
+	// @@ .. cpp:var:: oneof parameter_choice
 	// @@
-	// @@     The parameter value can be a string, an int64 or
-	// @@     a boolean
+	// @@ The parameter value can be a string, an int64 or
+	// @@ a boolean
 	// @@
 	//
 	// Types that are assignable to ParameterChoice:
@@ -768,25 +768,25 @@ type isInferParameter_ParameterChoice interface {
 }
 
 type InferParameter_BoolParam struct {
-	// @@    .. cpp:var:: bool bool_param
+	// @@ .. cpp:var:: bool bool_param
 	// @@
-	// @@       A boolean parameter value.
+	// @@ A boolean parameter value.
 	// @@
 	BoolParam bool `protobuf:"varint,1,opt,name=bool_param,json=boolParam,proto3,oneof"`
 }
 
 type InferParameter_Int64Param struct {
-	// @@    .. cpp:var:: int64 int64_param
+	// @@ .. cpp:var:: int64 int64_param
 	// @@
-	// @@       An int64 parameter value.
+	// @@ An int64 parameter value.
 	// @@
 	Int64Param int64 `protobuf:"varint,2,opt,name=int64_param,json=int64Param,proto3,oneof"`
 }
 
 type InferParameter_StringParam struct {
-	// @@    .. cpp:var:: string string_param
+	// @@ .. cpp:var:: string string_param
 	// @@
-	// @@       A string parameter value.
+	// @@ A string parameter value.
 	// @@
 	StringParam string `protobuf:"bytes,3,opt,name=string_param,json=stringParam,proto3,oneof"`
 }
@@ -800,9 +800,9 @@ func (*InferParameter_StringParam) isInferParameter_ParameterChoice() {}
 // @@
 // @@.. cpp:var:: message InferTensorContents
 // @@
-// @@   The data contained in a tensor represented by the repeated type
-// @@   that matches the tensor's data type. Protobuf oneof is not used
-// @@   because oneofs cannot contain repeated fields.
+// @@ The data contained in a tensor represented by the repeated type
+// @@ that matches the tensor's data type. Protobuf oneof is not used
+// @@ because oneofs cannot contain repeated fields.
 // @@
 type InferTensorContents struct {
 	state         protoimpl.MessageState
@@ -810,69 +810,69 @@ type InferTensorContents struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: bool bool_contents (repeated)
+	// @@ .. cpp:var:: bool bool_contents (repeated)
 	// @@
-	// @@     Representation for BOOL data type. The size must match what is
-	// @@     expected by the tensor's shape. The contents must be the flattened,
-	// @@     one-dimensional, row-major order of the tensor elements.
+	// @@ Representation for BOOL data type. The size must match what is
+	// @@ expected by the tensor's shape. The contents must be the flattened,
+	// @@ one-dimensional, row-major order of the tensor elements.
 	// @@
 	BoolContents []bool `protobuf:"varint,1,rep,packed,name=bool_contents,json=boolContents,proto3" json:"bool_contents,omitempty"`
 	// @@
-	// @@  .. cpp:var:: int32 int_contents (repeated)
+	// @@ .. cpp:var:: int32 int_contents (repeated)
 	// @@
-	// @@     Representation for INT8, INT16, and INT32 data types. The size
-	// @@     must match what is expected by the tensor's shape. The contents
-	// @@     must be the flattened, one-dimensional, row-major order of the
-	// @@     tensor elements.
+	// @@ Representation for INT8, INT16, and INT32 data types. The size
+	// @@ must match what is expected by the tensor's shape. The contents
+	// @@ must be the flattened, one-dimensional, row-major order of the
+	// @@ tensor elements.
 	// @@
 	IntContents []int32 `protobuf:"varint,2,rep,packed,name=int_contents,json=intContents,proto3" json:"int_contents,omitempty"`
 	// @@
-	// @@  .. cpp:var:: int64 int64_contents (repeated)
+	// @@ .. cpp:var:: int64 int64_contents (repeated)
 	// @@
-	// @@     Representation for INT64 data types. The size must match what
-	// @@     is expected by the tensor's shape. The contents must be the
-	// @@     flattened, one-dimensional, row-major order of the tensor elements.
+	// @@ Representation for INT64 data types. The size must match what
+	// @@ is expected by the tensor's shape. The contents must be the
+	// @@ flattened, one-dimensional, row-major order of the tensor elements.
 	// @@
 	Int64Contents []int64 `protobuf:"varint,3,rep,packed,name=int64_contents,json=int64Contents,proto3" json:"int64_contents,omitempty"`
 	// @@
-	// @@  .. cpp:var:: uint32 uint_contents (repeated)
+	// @@ .. cpp:var:: uint32 uint_contents (repeated)
 	// @@
-	// @@     Representation for UINT8, UINT16, and UINT32 data types. The size
-	// @@     must match what is expected by the tensor's shape. The contents
-	// @@     must be the flattened, one-dimensional, row-major order of the
-	// @@     tensor elements.
+	// @@ Representation for UINT8, UINT16, and UINT32 data types. The size
+	// @@ must match what is expected by the tensor's shape. The contents
+	// @@ must be the flattened, one-dimensional, row-major order of the
+	// @@ tensor elements.
 	// @@
 	UintContents []uint32 `protobuf:"varint,4,rep,packed,name=uint_contents,json=uintContents,proto3" json:"uint_contents,omitempty"`
 	// @@
-	// @@  .. cpp:var:: uint64 uint64_contents (repeated)
+	// @@ .. cpp:var:: uint64 uint64_contents (repeated)
 	// @@
-	// @@     Representation for UINT64 data types. The size must match what
-	// @@     is expected by the tensor's shape. The contents must be the
-	// @@     flattened, one-dimensional, row-major order of the tensor elements.
+	// @@ Representation for UINT64 data types. The size must match what
+	// @@ is expected by the tensor's shape. The contents must be the
+	// @@ flattened, one-dimensional, row-major order of the tensor elements.
 	// @@
 	Uint64Contents []uint64 `protobuf:"varint,5,rep,packed,name=uint64_contents,json=uint64Contents,proto3" json:"uint64_contents,omitempty"`
 	// @@
-	// @@  .. cpp:var:: float fp32_contents (repeated)
+	// @@ .. cpp:var:: float fp32_contents (repeated)
 	// @@
-	// @@     Representation for FP32 data type. The size must match what is
-	// @@     expected by the tensor's shape. The contents must be the flattened,
-	// @@     one-dimensional, row-major order of the tensor elements.
+	// @@ Representation for FP32 data type. The size must match what is
+	// @@ expected by the tensor's shape. The contents must be the flattened,
+	// @@ one-dimensional, row-major order of the tensor elements.
 	// @@
 	Fp32Contents []float32 `protobuf:"fixed32,6,rep,packed,name=fp32_contents,json=fp32Contents,proto3" json:"fp32_contents,omitempty"`
 	// @@
-	// @@  .. cpp:var:: double fp64_contents (repeated)
+	// @@ .. cpp:var:: double fp64_contents (repeated)
 	// @@
-	// @@     Representation for FP64 data type. The size must match what is
-	// @@     expected by the tensor's shape. The contents must be the flattened,
-	// @@     one-dimensional, row-major order of the tensor elements.
+	// @@ Representation for FP64 data type. The size must match what is
+	// @@ expected by the tensor's shape. The contents must be the flattened,
+	// @@ one-dimensional, row-major order of the tensor elements.
 	// @@
 	Fp64Contents []float64 `protobuf:"fixed64,7,rep,packed,name=fp64_contents,json=fp64Contents,proto3" json:"fp64_contents,omitempty"`
 	// @@
-	// @@  .. cpp:var:: bytes bytes_contents (repeated)
+	// @@ .. cpp:var:: bytes bytes_contents (repeated)
 	// @@
-	// @@     Representation for BYTES data type. The size must match what is
-	// @@     expected by the tensor's shape. The contents must be the flattened,
-	// @@     one-dimensional, row-major order of the tensor elements.
+	// @@ Representation for BYTES data type. The size must match what is
+	// @@ expected by the tensor's shape. The contents must be the flattened,
+	// @@ one-dimensional, row-major order of the tensor elements.
 	// @@
 	BytesContents [][]byte `protobuf:"bytes,8,rep,name=bytes_contents,json=bytesContents,proto3" json:"bytes_contents,omitempty"`
 }
@@ -968,71 +968,71 @@ func (x *InferTensorContents) GetBytesContents() [][]byte {
 // @@
 // @@.. cpp:var:: message ModelInferRequest
 // @@
-// @@   Request message for ModelInfer.
+// @@ Request message for ModelInfer.
 // @@
 type ModelInferRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: string model_name
+	// @@ .. cpp:var:: string model_name
 	// @@
-	// @@     The name of the model to use for inferencing.
+	// @@ The name of the model to use for inferencing.
 	// @@
 	ModelName string `protobuf:"bytes,1,opt,name=model_name,json=modelName,proto3" json:"model_name,omitempty"`
-	// @@  .. cpp:var:: string model_version
+	// @@ .. cpp:var:: string model_version
 	// @@
-	// @@     The version of the model to use for inference. If not
-	// @@     given the latest/most-recent version of the model is used.
+	// @@ The version of the model to use for inference. If not
+	// @@ given the latest/most-recent version of the model is used.
 	// @@
 	ModelVersion string `protobuf:"bytes,2,opt,name=model_version,json=modelVersion,proto3" json:"model_version,omitempty"`
-	// @@  .. cpp:var:: string id
+	// @@ .. cpp:var:: string id
 	// @@
-	// @@     Optional identifier for the request. If specified will be
-	// @@     returned in the response.
+	// @@ Optional identifier for the request. If specified will be
+	// @@ returned in the response.
 	// @@
 	Id string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	// @@  .. cpp:var:: map<string,InferParameter> parameters
+	// @@ .. cpp:var:: map<string,InferParameter> parameters
 	// @@
-	// @@     Optional inference parameters.
+	// @@ Optional inference parameters.
 	// @@
 	Parameters map[string]*InferParameter `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// @@
-	// @@  .. cpp:var:: InferInputTensor inputs (repeated)
+	// @@ .. cpp:var:: InferInputTensor inputs (repeated)
 	// @@
-	// @@     The input tensors for the inference.
+	// @@ The input tensors for the inference.
 	// @@
 	Inputs []*ModelInferRequest_InferInputTensor `protobuf:"bytes,5,rep,name=inputs,proto3" json:"inputs,omitempty"`
 	// @@
-	// @@  .. cpp:var:: InferRequestedOutputTensor outputs (repeated)
+	// @@ .. cpp:var:: InferRequestedOutputTensor outputs (repeated)
 	// @@
-	// @@     The requested output tensors for the inference. Optional, if not
-	// @@     specified all outputs specified in the model config will be
-	// @@     returned.
+	// @@ The requested output tensors for the inference. Optional, if not
+	// @@ specified all outputs specified in the model config will be
+	// @@ returned.
 	// @@
 	Outputs []*ModelInferRequest_InferRequestedOutputTensor `protobuf:"bytes,6,rep,name=outputs,proto3" json:"outputs,omitempty"`
 	// @@
-	// @@  .. cpp:var:: bytes raw_input_contents
+	// @@ .. cpp:var:: bytes raw_input_contents
 	// @@
-	// @@     The data contained in an input tensor can be represented in
-	// @@     "raw" bytes form or in the repeated type that matches the
-	// @@     tensor's data type. Using the "raw" bytes form will
-	// @@     typically allow higher performance due to the way protobuf
-	// @@     allocation and reuse interacts with GRPC. For example, see
-	// @@     https://github.com/grpc/grpc/issues/23231.
+	// @@ The data contained in an input tensor can be represented in
+	// @@ "raw" bytes form or in the repeated type that matches the
+	// @@ tensor's data type. Using the "raw" bytes form will
+	// @@ typically allow higher performance due to the way protobuf
+	// @@ allocation and reuse interacts with GRPC. For example, see
+	// @@ https://github.com/grpc/grpc/issues/23231.
 	// @@
-	// @@     To use the raw representation 'raw_input_contents' must be
-	// @@     initialized with data for each tensor in the same order as
-	// @@     'inputs'. For each tensor, the size of this content must
-	// @@     match what is expected by the tensor's shape and data
-	// @@     type. The raw data must be the flattened, one-dimensional,
-	// @@     row-major order of the tensor elements without any stride
-	// @@     or padding between the elements. Note that the FP16 and BF16 data
-	// @@     types must be represented as raw content as there is no
-	// @@     specific data type for a 16-bit float type.
+	// @@ To use the raw representation 'raw_input_contents' must be
+	// @@ initialized with data for each tensor in the same order as
+	// @@ 'inputs'. For each tensor, the size of this content must
+	// @@ match what is expected by the tensor's shape and data
+	// @@ type. The raw data must be the flattened, one-dimensional,
+	// @@ row-major order of the tensor elements without any stride
+	// @@ or padding between the elements. Note that the FP16 and BF16 data
+	// @@ types must be represented as raw content as there is no
+	// @@ specific data type for a 16-bit float type.
 	// @@
-	// @@     If this field is specified then InferInputTensor::contents
-	// @@     must not be specified for any input tensor.
+	// @@ If this field is specified then InferInputTensor::contents
+	// @@ must not be specified for any input tensor.
 	// @@
 	RawInputContents [][]byte `protobuf:"bytes,7,rep,name=raw_input_contents,json=rawInputContents,proto3" json:"raw_input_contents,omitempty"`
 }
@@ -1121,61 +1121,61 @@ func (x *ModelInferRequest) GetRawInputContents() [][]byte {
 // @@
 // @@.. cpp:var:: message ModelInferResponse
 // @@
-// @@   Response message for ModelInfer.
+// @@ Response message for ModelInfer.
 // @@
 type ModelInferResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: string model_name
+	// @@ .. cpp:var:: string model_name
 	// @@
-	// @@     The name of the model used for inference.
+	// @@ The name of the model used for inference.
 	// @@
 	ModelName string `protobuf:"bytes,1,opt,name=model_name,json=modelName,proto3" json:"model_name,omitempty"`
-	// @@  .. cpp:var:: string model_version
+	// @@ .. cpp:var:: string model_version
 	// @@
-	// @@     The version of the model used for inference.
+	// @@ The version of the model used for inference.
 	// @@
 	ModelVersion string `protobuf:"bytes,2,opt,name=model_version,json=modelVersion,proto3" json:"model_version,omitempty"`
-	// @@  .. cpp:var:: string id
+	// @@ .. cpp:var:: string id
 	// @@
-	// @@     The id of the inference request if one was specified.
+	// @@ The id of the inference request if one was specified.
 	// @@
 	Id string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	// @@  .. cpp:var:: map<string,InferParameter> parameters
+	// @@ .. cpp:var:: map<string,InferParameter> parameters
 	// @@
-	// @@     Optional inference response parameters.
+	// @@ Optional inference response parameters.
 	// @@
 	Parameters map[string]*InferParameter `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// @@
-	// @@  .. cpp:var:: InferOutputTensor outputs (repeated)
+	// @@ .. cpp:var:: InferOutputTensor outputs (repeated)
 	// @@
-	// @@     The output tensors holding inference results.
+	// @@ The output tensors holding inference results.
 	// @@
 	Outputs []*ModelInferResponse_InferOutputTensor `protobuf:"bytes,5,rep,name=outputs,proto3" json:"outputs,omitempty"`
 	// @@
-	// @@  .. cpp:var:: bytes raw_output_contents
+	// @@ .. cpp:var:: bytes raw_output_contents
 	// @@
-	// @@     The data contained in an output tensor can be represented in
-	// @@     "raw" bytes form or in the repeated type that matches the
-	// @@     tensor's data type. Using the "raw" bytes form will
-	// @@     typically allow higher performance due to the way protobuf
-	// @@     allocation and reuse interacts with GRPC. For example, see
-	// @@     https://github.com/grpc/grpc/issues/23231.
+	// @@ The data contained in an output tensor can be represented in
+	// @@ "raw" bytes form or in the repeated type that matches the
+	// @@ tensor's data type. Using the "raw" bytes form will
+	// @@ typically allow higher performance due to the way protobuf
+	// @@ allocation and reuse interacts with GRPC. For example, see
+	// @@ https://github.com/grpc/grpc/issues/23231.
 	// @@
-	// @@     To use the raw representation 'raw_output_contents' must be
-	// @@     initialized with data for each tensor in the same order as
-	// @@     'outputs'. For each tensor, the size of this content must
-	// @@     match what is expected by the tensor's shape and data
-	// @@     type. The raw data must be the flattened, one-dimensional,
-	// @@     row-major order of the tensor elements without any stride
-	// @@     or padding between the elements. Note that the FP16 and BF16 data
-	// @@     types must be represented as raw content as there is no
-	// @@     specific data type for a 16-bit float type.
+	// @@ To use the raw representation 'raw_output_contents' must be
+	// @@ initialized with data for each tensor in the same order as
+	// @@ 'outputs'. For each tensor, the size of this content must
+	// @@ match what is expected by the tensor's shape and data
+	// @@ type. The raw data must be the flattened, one-dimensional,
+	// @@ row-major order of the tensor elements without any stride
+	// @@ or padding between the elements. Note that the FP16 and BF16 data
+	// @@ types must be represented as raw content as there is no
+	// @@ specific data type for a 16-bit float type.
 	// @@
-	// @@     If this field is specified then InferOutputTensor::contents
-	// @@     must not be specified for any output tensor.
+	// @@ If this field is specified then InferOutputTensor::contents
+	// @@ must not be specified for any output tensor.
 	// @@
 	RawOutputContents [][]byte `protobuf:"bytes,6,rep,name=raw_output_contents,json=rawOutputContents,proto3" json:"raw_output_contents,omitempty"`
 }
@@ -1257,7 +1257,7 @@ func (x *ModelInferResponse) GetRawOutputContents() [][]byte {
 // @@
 // @@.. cpp:var:: message ModelStreamInferResponse
 // @@
-// @@   Response message for ModelStreamInfer.
+// @@ Response message for ModelStreamInfer.
 // @@
 type ModelStreamInferResponse struct {
 	state         protoimpl.MessageState
@@ -1265,16 +1265,16 @@ type ModelStreamInferResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string error_message
+	// @@ .. cpp:var:: string error_message
 	// @@
-	// @@     The message describing the error. The empty message
-	// @@     indicates the inference was successful without errors.
+	// @@ The message describing the error. The empty message
+	// @@ indicates the inference was successful without errors.
 	// @@
 	ErrorMessage string `protobuf:"bytes,1,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
 	// @@
-	// @@  .. cpp:var:: ModelInferResponse infer_response
+	// @@ .. cpp:var:: ModelInferResponse infer_response
 	// @@
-	// @@     Holds the results of the request.
+	// @@ Holds the results of the request.
 	// @@
 	InferResponse *ModelInferResponse `protobuf:"bytes,2,opt,name=infer_response,json=inferResponse,proto3" json:"infer_response,omitempty"`
 }
@@ -1328,7 +1328,7 @@ func (x *ModelStreamInferResponse) GetInferResponse() *ModelInferResponse {
 // @@
 // @@.. cpp:var:: message ModelConfigRequest
 // @@
-// @@   Request message for ModelConfig.
+// @@ Request message for ModelConfig.
 // @@
 type ModelConfigRequest struct {
 	state         protoimpl.MessageState
@@ -1336,15 +1336,15 @@ type ModelConfigRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The name of the model.
+	// @@ The name of the model.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// @@  .. cpp:var:: string version
+	// @@ .. cpp:var:: string version
 	// @@
-	// @@     The version of the model. If not given the model version
-	// @@     is selected automatically based on the version policy.
+	// @@ The version of the model. If not given the model version
+	// @@ is selected automatically based on the version policy.
 	// @@
 	Version string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 }
@@ -1398,7 +1398,7 @@ func (x *ModelConfigRequest) GetVersion() string {
 // @@
 // @@.. cpp:var:: message ModelConfigResponse
 // @@
-// @@   Response message for ModelConfig.
+// @@ Response message for ModelConfig.
 // @@
 type ModelConfigResponse struct {
 	state         protoimpl.MessageState
@@ -1406,9 +1406,9 @@ type ModelConfigResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: ModelConfig config
+	// @@ .. cpp:var:: ModelConfig config
 	// @@
-	// @@     The model configuration.
+	// @@ The model configuration.
 	// @@
 	Config *ModelConfig `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
 }
@@ -1455,23 +1455,23 @@ func (x *ModelConfigResponse) GetConfig() *ModelConfig {
 // @@
 // @@.. cpp:var:: message ModelStatisticsRequest
 // @@
-// @@   Request message for ModelStatistics.
+// @@ Request message for ModelStatistics.
 // @@
 type ModelStatisticsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The name of the model. If not given returns statistics for
-	// @@     all models.
+	// @@ The name of the model. If not given returns statistics for
+	// @@ all models.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// @@  .. cpp:var:: string version
+	// @@ .. cpp:var:: string version
 	// @@
-	// @@     The version of the model. If not given returns statistics for
-	// @@     all model versions.
+	// @@ The version of the model. If not given returns statistics for
+	// @@ all model versions.
 	// @@
 	Version string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 }
@@ -1525,21 +1525,21 @@ func (x *ModelStatisticsRequest) GetVersion() string {
 // @@
 // @@.. cpp:var:: message StatisticDuration
 // @@
-// @@   Statistic recording a cumulative duration metric.
+// @@ Statistic recording a cumulative duration metric.
 // @@
 type StatisticDuration struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: uint64 count
+	// @@ .. cpp:var:: uint64 count
 	// @@
-	// @@     Cumulative number of times this metric occurred.
+	// @@ Cumulative number of times this metric occurred.
 	// @@
 	Count uint64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-	// @@  .. cpp:var:: uint64 total_time_ns
+	// @@ .. cpp:var:: uint64 total_time_ns
 	// @@
-	// @@     Total collected duration of this metric in nanoseconds.
+	// @@ Total collected duration of this metric in nanoseconds.
 	// @@
 	Ns uint64 `protobuf:"varint,2,opt,name=ns,proto3" json:"ns,omitempty"`
 }
@@ -1593,89 +1593,89 @@ func (x *StatisticDuration) GetNs() uint64 {
 // @@
 // @@.. cpp:var:: message InferStatistics
 // @@
-// @@   Inference statistics.
+// @@ Inference statistics.
 // @@
 type InferStatistics struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: StatisticDuration success
+	// @@ .. cpp:var:: StatisticDuration success
 	// @@
-	// @@     Cumulative count and duration for successful inference
-	// @@     request. The "success" count and cumulative duration includes
-	// @@     cache hits.
+	// @@ Cumulative count and duration for successful inference
+	// @@ request. The "success" count and cumulative duration includes
+	// @@ cache hits.
 	// @@
 	Success *StatisticDuration `protobuf:"bytes,1,opt,name=success,proto3" json:"success,omitempty"`
-	// @@  .. cpp:var:: StatisticDuration fail
+	// @@ .. cpp:var:: StatisticDuration fail
 	// @@
-	// @@     Cumulative count and duration for failed inference
-	// @@     request.
+	// @@ Cumulative count and duration for failed inference
+	// @@ request.
 	// @@
 	Fail *StatisticDuration `protobuf:"bytes,2,opt,name=fail,proto3" json:"fail,omitempty"`
-	// @@  .. cpp:var:: StatisticDuration queue
+	// @@ .. cpp:var:: StatisticDuration queue
 	// @@
-	// @@     The count and cumulative duration that inference requests wait in
-	// @@     scheduling or other queues. The "queue" count and cumulative
-	// @@     duration includes cache hits.
+	// @@ The count and cumulative duration that inference requests wait in
+	// @@ scheduling or other queues. The "queue" count and cumulative
+	// @@ duration includes cache hits.
 	// @@
 	Queue *StatisticDuration `protobuf:"bytes,3,opt,name=queue,proto3" json:"queue,omitempty"`
-	// @@  .. cpp:var:: StatisticDuration compute_input
+	// @@ .. cpp:var:: StatisticDuration compute_input
 	// @@
-	// @@     The count and cumulative duration to prepare input tensor data as
-	// @@     required by the model framework / backend. For example, this duration
-	// @@     should include the time to copy input tensor data to the GPU.
-	// @@     The "compute_input" count and cumulative duration do not account for
-	// @@     requests that were a cache hit. See the "cache_hit" field for more
-	// @@     info.
+	// @@ The count and cumulative duration to prepare input tensor data as
+	// @@ required by the model framework / backend. For example, this duration
+	// @@ should include the time to copy input tensor data to the GPU.
+	// @@ The "compute_input" count and cumulative duration do not account for
+	// @@ requests that were a cache hit. See the "cache_hit" field for more
+	// @@ info.
 	// @@
 	ComputeInput *StatisticDuration `protobuf:"bytes,4,opt,name=compute_input,json=computeInput,proto3" json:"compute_input,omitempty"`
-	// @@  .. cpp:var:: StatisticDuration compute_infer
+	// @@ .. cpp:var:: StatisticDuration compute_infer
 	// @@
-	// @@     The count and cumulative duration to execute the model.
-	// @@     The "compute_infer" count and cumulative duration do not account for
-	// @@     requests that were a cache hit. See the "cache_hit" field for more
-	// @@     info.
+	// @@ The count and cumulative duration to execute the model.
+	// @@ The "compute_infer" count and cumulative duration do not account for
+	// @@ requests that were a cache hit. See the "cache_hit" field for more
+	// @@ info.
 	// @@
 	ComputeInfer *StatisticDuration `protobuf:"bytes,5,opt,name=compute_infer,json=computeInfer,proto3" json:"compute_infer,omitempty"`
-	// @@  .. cpp:var:: StatisticDuration compute_output
+	// @@ .. cpp:var:: StatisticDuration compute_output
 	// @@
-	// @@     The count and cumulative duration to extract output tensor data
-	// @@     produced by the model framework / backend. For example, this duration
-	// @@     should include the time to copy output tensor data from the GPU.
-	// @@     The "compute_output" count and cumulative duration do not account for
-	// @@     requests that were a cache hit. See the "cache_hit" field for more
-	// @@     info.
+	// @@ The count and cumulative duration to extract output tensor data
+	// @@ produced by the model framework / backend. For example, this duration
+	// @@ should include the time to copy output tensor data from the GPU.
+	// @@ The "compute_output" count and cumulative duration do not account for
+	// @@ requests that were a cache hit. See the "cache_hit" field for more
+	// @@ info.
 	// @@
 	ComputeOutput *StatisticDuration `protobuf:"bytes,6,opt,name=compute_output,json=computeOutput,proto3" json:"compute_output,omitempty"`
-	// @@  .. cpp:var:: StatisticDuration cache_hit
+	// @@ .. cpp:var:: StatisticDuration cache_hit
 	// @@
-	// @@     The count of response cache hits and cumulative duration to lookup
-	// @@     and extract output tensor data from the Response Cache on a cache
-	// @@     hit. For example, this duration should include the time to copy
-	// @@     output tensor data from the Response Cache to the response object.
-	// @@     On cache hits, triton does not need to go to the model/backend
-	// @@     for the output tensor data, so the "compute_input", "compute_infer",
-	// @@     and "compute_output" fields are not updated. Assuming the response
-	// @@     cache is enabled for a given model, a cache hit occurs for a
-	// @@     request to that model when the request metadata (model name,
-	// @@     model version, model inputs) hashes to an existing entry in the
-	// @@     cache. On a cache miss, the request hash and response output tensor
-	// @@     data is added to the cache. See response cache docs for more info:
-	// @@     https://github.com/triton-inference-server/server/blob/main/docs/response_cache.md
+	// @@ The count of response cache hits and cumulative duration to lookup
+	// @@ and extract output tensor data from the Response Cache on a cache
+	// @@ hit. For example, this duration should include the time to copy
+	// @@ output tensor data from the Response Cache to the response object.
+	// @@ On cache hits, triton does not need to go to the model/backend
+	// @@ for the output tensor data, so the "compute_input", "compute_infer",
+	// @@ and "compute_output" fields are not updated. Assuming the response
+	// @@ cache is enabled for a given model, a cache hit occurs for a
+	// @@ request to that model when the request metadata (model name,
+	// @@ model version, model inputs) hashes to an existing entry in the
+	// @@ cache. On a cache miss, the request hash and response output tensor
+	// @@ data is added to the cache. See response cache docs for more info:
+	// @@ https://github.com/triton-inference-server/server/blob/main/docs/response_cache.md
 	// @@
 	CacheHit *StatisticDuration `protobuf:"bytes,7,opt,name=cache_hit,json=cacheHit,proto3" json:"cache_hit,omitempty"`
-	// @@  .. cpp:var:: StatisticDuration cache_miss
+	// @@ .. cpp:var:: StatisticDuration cache_miss
 	// @@
-	// @@     The count of response cache misses and cumulative duration to lookup
-	// @@     and insert output tensor data from the computed response to the cache.
-	// @@     For example, this duration should include the time to copy
-	// @@     output tensor data from the response object to the Response Cache.
-	// @@     Assuming the response cache is enabled for a given model, a cache
-	// @@     miss occurs for a request to that model when the request metadata
-	// @@     does NOT hash to an existing entry in the cache. See the response
-	// @@     cache docs for more info:
-	// @@     https://github.com/triton-inference-server/server/blob/main/docs/response_cache.md
+	// @@ The count of response cache misses and cumulative duration to lookup
+	// @@ and insert output tensor data from the computed response to the cache.
+	// @@ For example, this duration should include the time to copy
+	// @@ output tensor data from the response object to the Response Cache.
+	// @@ Assuming the response cache is enabled for a given model, a cache
+	// @@ miss occurs for a request to that model when the request metadata
+	// @@ does NOT hash to an existing entry in the cache. See the response
+	// @@ cache docs for more info:
+	// @@ https://github.com/triton-inference-server/server/blob/main/docs/response_cache.md
 	// @@
 	CacheMiss *StatisticDuration `protobuf:"bytes,8,opt,name=cache_miss,json=cacheMiss,proto3" json:"cache_miss,omitempty"`
 }
@@ -1771,38 +1771,38 @@ func (x *InferStatistics) GetCacheMiss() *StatisticDuration {
 // @@
 // @@.. cpp:var:: message InferBatchStatistics
 // @@
-// @@   Inference batch statistics.
+// @@ Inference batch statistics.
 // @@
 type InferBatchStatistics struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: uint64 batch_size
+	// @@ .. cpp:var:: uint64 batch_size
 	// @@
-	// @@     The size of the batch.
+	// @@ The size of the batch.
 	// @@
 	BatchSize uint64 `protobuf:"varint,1,opt,name=batch_size,json=batchSize,proto3" json:"batch_size,omitempty"`
-	// @@  .. cpp:var:: StatisticDuration compute_input
+	// @@ .. cpp:var:: StatisticDuration compute_input
 	// @@
-	// @@     The count and cumulative duration to prepare input tensor data as
-	// @@     required by the model framework / backend with the given batch size.
-	// @@     For example, this duration should include the time to copy input
-	// @@     tensor data to the GPU.
+	// @@ The count and cumulative duration to prepare input tensor data as
+	// @@ required by the model framework / backend with the given batch size.
+	// @@ For example, this duration should include the time to copy input
+	// @@ tensor data to the GPU.
 	// @@
 	ComputeInput *StatisticDuration `protobuf:"bytes,2,opt,name=compute_input,json=computeInput,proto3" json:"compute_input,omitempty"`
-	// @@  .. cpp:var:: StatisticDuration compute_infer
+	// @@ .. cpp:var:: StatisticDuration compute_infer
 	// @@
-	// @@     The count and cumulative duration to execute the model with the given
-	// @@     batch size.
+	// @@ The count and cumulative duration to execute the model with the given
+	// @@ batch size.
 	// @@
 	ComputeInfer *StatisticDuration `protobuf:"bytes,3,opt,name=compute_infer,json=computeInfer,proto3" json:"compute_infer,omitempty"`
-	// @@  .. cpp:var:: StatisticDuration compute_output
+	// @@ .. cpp:var:: StatisticDuration compute_output
 	// @@
-	// @@     The count and cumulative duration to extract output tensor data
-	// @@     produced by the model framework / backend with the given batch size.
-	// @@     For example, this duration should include the time to copy output
-	// @@     tensor data from the GPU.
+	// @@ The count and cumulative duration to extract output tensor data
+	// @@ produced by the model framework / backend with the given batch size.
+	// @@ For example, this duration should include the time to copy output
+	// @@ tensor data from the GPU.
 	// @@
 	ComputeOutput *StatisticDuration `protobuf:"bytes,4,opt,name=compute_output,json=computeOutput,proto3" json:"compute_output,omitempty"`
 }
@@ -1870,67 +1870,67 @@ func (x *InferBatchStatistics) GetComputeOutput() *StatisticDuration {
 // @@
 // @@.. cpp:var:: message ModelStatistics
 // @@
-// @@   Statistics for a specific model and version.
+// @@ Statistics for a specific model and version.
 // @@
 type ModelStatistics struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The name of the model. If not given returns statistics for all
+	// @@ The name of the model. If not given returns statistics for all
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// @@  .. cpp:var:: string version
+	// @@ .. cpp:var:: string version
 	// @@
-	// @@     The version of the model.
+	// @@ The version of the model.
 	// @@
 	Version string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
-	// @@  .. cpp:var:: uint64 last_inference
+	// @@ .. cpp:var:: uint64 last_inference
 	// @@
-	// @@     The timestamp of the last inference request made for this model,
-	// @@     as milliseconds since the epoch.
+	// @@ The timestamp of the last inference request made for this model,
+	// @@ as milliseconds since the epoch.
 	// @@
 	LastInference uint64 `protobuf:"varint,3,opt,name=last_inference,json=lastInference,proto3" json:"last_inference,omitempty"`
-	// @@  .. cpp:var:: uint64 last_inference
+	// @@ .. cpp:var:: uint64 last_inference
 	// @@
-	// @@     The cumulative count of successful inference requests made for this
-	// @@     model. Each inference in a batched request is counted as an
-	// @@     individual inference. For example, if a client sends a single
-	// @@     inference request with batch size 64, "inference_count" will be
-	// @@     incremented by 64. Similarly, if a clients sends 64 individual
-	// @@     requests each with batch size 1, "inference_count" will be
-	// @@     incremented by 64. The "inference_count" value DOES NOT include
-	// @@     cache hits.
+	// @@ The cumulative count of successful inference requests made for this
+	// @@ model. Each inference in a batched request is counted as an
+	// @@ individual inference. For example, if a client sends a single
+	// @@ inference request with batch size 64, "inference_count" will be
+	// @@ incremented by 64. Similarly, if a clients sends 64 individual
+	// @@ requests each with batch size 1, "inference_count" will be
+	// @@ incremented by 64. The "inference_count" value DOES NOT include
+	// @@ cache hits.
 	// @@
 	InferenceCount uint64 `protobuf:"varint,4,opt,name=inference_count,json=inferenceCount,proto3" json:"inference_count,omitempty"`
-	// @@  .. cpp:var:: uint64 last_inference
+	// @@ .. cpp:var:: uint64 last_inference
 	// @@
-	// @@     The cumulative count of the number of successful inference executions
-	// @@     performed for the model. When dynamic batching is enabled, a single
-	// @@     model execution can perform inferencing for more than one inference
-	// @@     request. For example, if a clients sends 64 individual requests each
-	// @@     with batch size 1 and the dynamic batcher batches them into a single
-	// @@     large batch for model execution then "execution_count" will be
-	// @@     incremented by 1. If, on the other hand, the dynamic batcher is not
-	// @@     enabled for that each of the 64 individual requests is executed
-	// @@     independently, then "execution_count" will be incremented by 64.
-	// @@     The "execution_count" value DOES NOT include cache hits.
+	// @@ The cumulative count of the number of successful inference executions
+	// @@ performed for the model. When dynamic batching is enabled, a single
+	// @@ model execution can perform inferencing for more than one inference
+	// @@ request. For example, if a clients sends 64 individual requests each
+	// @@ with batch size 1 and the dynamic batcher batches them into a single
+	// @@ large batch for model execution then "execution_count" will be
+	// @@ incremented by 1. If, on the other hand, the dynamic batcher is not
+	// @@ enabled for that each of the 64 individual requests is executed
+	// @@ independently, then "execution_count" will be incremented by 64.
+	// @@ The "execution_count" value DOES NOT include cache hits.
 	// @@
 	ExecutionCount uint64 `protobuf:"varint,5,opt,name=execution_count,json=executionCount,proto3" json:"execution_count,omitempty"`
-	// @@  .. cpp:var:: InferStatistics inference_stats
+	// @@ .. cpp:var:: InferStatistics inference_stats
 	// @@
-	// @@     The aggregate statistics for the model/version.
+	// @@ The aggregate statistics for the model/version.
 	// @@
 	InferenceStats *InferStatistics `protobuf:"bytes,6,opt,name=inference_stats,json=inferenceStats,proto3" json:"inference_stats,omitempty"`
-	// @@  .. cpp:var:: InferBatchStatistics batch_stats (repeated)
+	// @@ .. cpp:var:: InferBatchStatistics batch_stats (repeated)
 	// @@
-	// @@     The aggregate statistics for each different batch size that is
-	// @@     executed in the model. The batch statistics indicate how many actual
-	// @@     model executions were performed and show differences due to different
-	// @@     batch size (for example, larger batches typically take longer to
-	// @@     compute).
+	// @@ The aggregate statistics for each different batch size that is
+	// @@ executed in the model. The batch statistics indicate how many actual
+	// @@ model executions were performed and show differences due to different
+	// @@ batch size (for example, larger batches typically take longer to
+	// @@ compute).
 	// @@
 	BatchStats []*InferBatchStatistics `protobuf:"bytes,7,rep,name=batch_stats,json=batchStats,proto3" json:"batch_stats,omitempty"`
 }
@@ -2019,16 +2019,16 @@ func (x *ModelStatistics) GetBatchStats() []*InferBatchStatistics {
 // @@
 // @@.. cpp:var:: message ModelStatisticsResponse
 // @@
-// @@   Response message for ModelStatistics.
+// @@ Response message for ModelStatistics.
 // @@
 type ModelStatisticsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: ModelStatistics model_stats (repeated)
+	// @@ .. cpp:var:: ModelStatistics model_stats (repeated)
 	// @@
-	// @@     Statistics for each requested model.
+	// @@ Statistics for each requested model.
 	// @@
 	ModelStats []*ModelStatistics `protobuf:"bytes,1,rep,name=model_stats,json=modelStats,proto3" json:"model_stats,omitempty"`
 }
@@ -2075,17 +2075,17 @@ func (x *ModelStatisticsResponse) GetModelStats() []*ModelStatistics {
 // @@
 // @@.. cpp:var:: message ModelRepositoryParameter
 // @@
-// @@   An model repository parameter value.
+// @@ An model repository parameter value.
 // @@
 type ModelRepositoryParameter struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: oneof parameter_choice
+	// @@ .. cpp:var:: oneof parameter_choice
 	// @@
-	// @@     The parameter value can be a string, an int64 or
-	// @@     a boolean
+	// @@ The parameter value can be a string, an int64 or
+	// @@ a boolean
 	// @@
 	//
 	// Types that are assignable to ParameterChoice:
@@ -2169,33 +2169,33 @@ type isModelRepositoryParameter_ParameterChoice interface {
 }
 
 type ModelRepositoryParameter_BoolParam struct {
-	// @@    .. cpp:var:: bool bool_param
+	// @@ .. cpp:var:: bool bool_param
 	// @@
-	// @@       A boolean parameter value.
+	// @@ A boolean parameter value.
 	// @@
 	BoolParam bool `protobuf:"varint,1,opt,name=bool_param,json=boolParam,proto3,oneof"`
 }
 
 type ModelRepositoryParameter_Int64Param struct {
-	// @@    .. cpp:var:: int64 int64_param
+	// @@ .. cpp:var:: int64 int64_param
 	// @@
-	// @@       An int64 parameter value.
+	// @@ An int64 parameter value.
 	// @@
 	Int64Param int64 `protobuf:"varint,2,opt,name=int64_param,json=int64Param,proto3,oneof"`
 }
 
 type ModelRepositoryParameter_StringParam struct {
-	// @@    .. cpp:var:: string string_param
+	// @@ .. cpp:var:: string string_param
 	// @@
-	// @@       A string parameter value.
+	// @@ A string parameter value.
 	// @@
 	StringParam string `protobuf:"bytes,3,opt,name=string_param,json=stringParam,proto3,oneof"`
 }
 
 type ModelRepositoryParameter_BytesParam struct {
-	// @@    .. cpp:var:: bytes bytes_param
+	// @@ .. cpp:var:: bytes bytes_param
 	// @@
-	// @@       A bytes parameter value.
+	// @@ A bytes parameter value.
 	// @@
 	BytesParam []byte `protobuf:"bytes,4,opt,name=bytes_param,json=bytesParam,proto3,oneof"`
 }
@@ -2211,22 +2211,22 @@ func (*ModelRepositoryParameter_BytesParam) isModelRepositoryParameter_Parameter
 // @@
 // @@.. cpp:var:: message RepositoryIndexRequest
 // @@
-// @@   Request message for RepositoryIndex.
+// @@ Request message for RepositoryIndex.
 // @@
 type RepositoryIndexRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: string repository_name
+	// @@ .. cpp:var:: string repository_name
 	// @@
-	// @@     The name of the repository. If empty the index is returned
-	// @@     for all repositories.
+	// @@ The name of the repository. If empty the index is returned
+	// @@ for all repositories.
 	// @@
 	RepositoryName string `protobuf:"bytes,1,opt,name=repository_name,json=repositoryName,proto3" json:"repository_name,omitempty"`
-	// @@  .. cpp:var:: bool ready
+	// @@ .. cpp:var:: bool ready
 	// @@
-	// @@     If true returned only models currently ready for inferencing.
+	// @@ If true returned only models currently ready for inferencing.
 	// @@
 	Ready bool `protobuf:"varint,2,opt,name=ready,proto3" json:"ready,omitempty"`
 }
@@ -2280,7 +2280,7 @@ func (x *RepositoryIndexRequest) GetReady() bool {
 // @@
 // @@.. cpp:var:: message RepositoryIndexResponse
 // @@
-// @@   Response message for RepositoryIndex.
+// @@ Response message for RepositoryIndex.
 // @@
 type RepositoryIndexResponse struct {
 	state         protoimpl.MessageState
@@ -2288,9 +2288,9 @@ type RepositoryIndexResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: ModelIndex models (repeated)
+	// @@ .. cpp:var:: ModelIndex models (repeated)
 	// @@
-	// @@     An index entry for each model.
+	// @@ An index entry for each model.
 	// @@
 	Models []*RepositoryIndexResponse_ModelIndex `protobuf:"bytes,1,rep,name=models,proto3" json:"models,omitempty"`
 }
@@ -2337,27 +2337,27 @@ func (x *RepositoryIndexResponse) GetModels() []*RepositoryIndexResponse_ModelIn
 // @@
 // @@.. cpp:var:: message RepositoryModelLoadRequest
 // @@
-// @@   Request message for RepositoryModelLoad.
+// @@ Request message for RepositoryModelLoad.
 // @@
 type RepositoryModelLoadRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: string repository_name
+	// @@ .. cpp:var:: string repository_name
 	// @@
-	// @@     The name of the repository to load from. If empty the model
-	// @@     is loaded from any repository.
+	// @@ The name of the repository to load from. If empty the model
+	// @@ is loaded from any repository.
 	// @@
 	RepositoryName string `protobuf:"bytes,1,opt,name=repository_name,json=repositoryName,proto3" json:"repository_name,omitempty"`
-	// @@  .. cpp:var:: string repository_name
+	// @@ .. cpp:var:: string repository_name
 	// @@
-	// @@     The name of the model to load, or reload.
+	// @@ The name of the model to load, or reload.
 	// @@
 	ModelName string `protobuf:"bytes,2,opt,name=model_name,json=modelName,proto3" json:"model_name,omitempty"`
-	// @@  .. cpp:var:: map<string,ModelRepositoryParameter> parameters
+	// @@ .. cpp:var:: map<string,ModelRepositoryParameter> parameters
 	// @@
-	// @@     Optional model repository request parameters.
+	// @@ Optional model repository request parameters.
 	// @@
 	Parameters map[string]*ModelRepositoryParameter `protobuf:"bytes,3,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
@@ -2418,7 +2418,7 @@ func (x *RepositoryModelLoadRequest) GetParameters() map[string]*ModelRepository
 // @@
 // @@.. cpp:var:: message RepositoryModelLoadResponse
 // @@
-// @@   Response message for RepositoryModelLoad.
+// @@ Response message for RepositoryModelLoad.
 // @@
 type RepositoryModelLoadResponse struct {
 	state         protoimpl.MessageState
@@ -2461,27 +2461,27 @@ func (*RepositoryModelLoadResponse) Descriptor() ([]byte, []int) {
 // @@
 // @@.. cpp:var:: message RepositoryModelUnloadRequest
 // @@
-// @@   Request message for RepositoryModelUnload.
+// @@ Request message for RepositoryModelUnload.
 // @@
 type RepositoryModelUnloadRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: string repository_name
+	// @@ .. cpp:var:: string repository_name
 	// @@
-	// @@     The name of the repository from which the model was originally
-	// @@     loaded. If empty the repository is not considered.
+	// @@ The name of the repository from which the model was originally
+	// @@ loaded. If empty the repository is not considered.
 	// @@
 	RepositoryName string `protobuf:"bytes,1,opt,name=repository_name,json=repositoryName,proto3" json:"repository_name,omitempty"`
-	// @@  .. cpp:var:: string repository_name
+	// @@ .. cpp:var:: string repository_name
 	// @@
-	// @@     The name of the model to unload.
+	// @@ The name of the model to unload.
 	// @@
 	ModelName string `protobuf:"bytes,2,opt,name=model_name,json=modelName,proto3" json:"model_name,omitempty"`
-	// @@  .. cpp:var:: map<string,ModelRepositoryParameter> parameters
+	// @@ .. cpp:var:: map<string,ModelRepositoryParameter> parameters
 	// @@
-	// @@     Optional model repository request parameters.
+	// @@ Optional model repository request parameters.
 	// @@
 	Parameters map[string]*ModelRepositoryParameter `protobuf:"bytes,3,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
@@ -2542,7 +2542,7 @@ func (x *RepositoryModelUnloadRequest) GetParameters() map[string]*ModelReposito
 // @@
 // @@.. cpp:var:: message RepositoryModelUnloadResponse
 // @@
-// @@   Response message for RepositoryModelUnload.
+// @@ Response message for RepositoryModelUnload.
 // @@
 type RepositoryModelUnloadResponse struct {
 	state         protoimpl.MessageState
@@ -2585,7 +2585,7 @@ func (*RepositoryModelUnloadResponse) Descriptor() ([]byte, []int) {
 // @@
 // @@.. cpp:var:: message SystemSharedMemoryStatusRequest
 // @@
-// @@   Request message for SystemSharedMemoryStatus.
+// @@ Request message for SystemSharedMemoryStatus.
 // @@
 type SystemSharedMemoryStatusRequest struct {
 	state         protoimpl.MessageState
@@ -2593,10 +2593,10 @@ type SystemSharedMemoryStatusRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The name of the region to get status for. If empty the
-	// @@     status is returned for all registered regions.
+	// @@ The name of the region to get status for. If empty the
+	// @@ status is returned for all registered regions.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
@@ -2643,7 +2643,7 @@ func (x *SystemSharedMemoryStatusRequest) GetName() string {
 // @@
 // @@.. cpp:var:: message SystemSharedMemoryStatusResponse
 // @@
-// @@   Response message for SystemSharedMemoryStatus.
+// @@ Response message for SystemSharedMemoryStatus.
 // @@
 type SystemSharedMemoryStatusResponse struct {
 	state         protoimpl.MessageState
@@ -2651,10 +2651,10 @@ type SystemSharedMemoryStatusResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: map<string,RegionStatus> regions
+	// @@ .. cpp:var:: map<string,RegionStatus> regions
 	// @@
-	// @@     Status for each of the registered regions, indexed by
-	// @@     region name.
+	// @@ Status for each of the registered regions, indexed by
+	// @@ region name.
 	// @@
 	Regions map[string]*SystemSharedMemoryStatusResponse_RegionStatus `protobuf:"bytes,1,rep,name=regions,proto3" json:"regions,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
@@ -2701,7 +2701,7 @@ func (x *SystemSharedMemoryStatusResponse) GetRegions() map[string]*SystemShared
 // @@
 // @@.. cpp:var:: message SystemSharedMemoryRegisterRequest
 // @@
-// @@   Request message for SystemSharedMemoryRegister.
+// @@ Request message for SystemSharedMemoryRegister.
 // @@
 type SystemSharedMemoryRegisterRequest struct {
 	state         protoimpl.MessageState
@@ -2709,26 +2709,26 @@ type SystemSharedMemoryRegisterRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The name of the region to register.
+	// @@ The name of the region to register.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// @@  .. cpp:var:: string shared_memory_key
+	// @@ .. cpp:var:: string shared_memory_key
 	// @@
-	// @@     The key of the underlying memory object that contains the
-	// @@     shared memory region.
+	// @@ The key of the underlying memory object that contains the
+	// @@ shared memory region.
 	// @@
 	Key string `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
-	// @@  .. cpp:var:: uint64 offset
+	// @@ .. cpp:var:: uint64 offset
 	// @@
-	// @@     Offset, in bytes, within the underlying memory object to
-	// @@     the start of the shared memory region.
+	// @@ Offset, in bytes, within the underlying memory object to
+	// @@ the start of the shared memory region.
 	// @@
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// @@  .. cpp:var:: uint64 byte_size
+	// @@ .. cpp:var:: uint64 byte_size
 	// @@
-	// @@     Size of the shared memory region, in bytes.
+	// @@ Size of the shared memory region, in bytes.
 	// @@
 	ByteSize uint64 `protobuf:"varint,4,opt,name=byte_size,json=byteSize,proto3" json:"byte_size,omitempty"`
 }
@@ -2796,7 +2796,7 @@ func (x *SystemSharedMemoryRegisterRequest) GetByteSize() uint64 {
 // @@
 // @@.. cpp:var:: message SystemSharedMemoryRegisterResponse
 // @@
-// @@   Response message for SystemSharedMemoryRegister.
+// @@ Response message for SystemSharedMemoryRegister.
 // @@
 type SystemSharedMemoryRegisterResponse struct {
 	state         protoimpl.MessageState
@@ -2839,7 +2839,7 @@ func (*SystemSharedMemoryRegisterResponse) Descriptor() ([]byte, []int) {
 // @@
 // @@.. cpp:var:: message SystemSharedMemoryUnregisterRequest
 // @@
-// @@   Request message for SystemSharedMemoryUnregister.
+// @@ Request message for SystemSharedMemoryUnregister.
 // @@
 type SystemSharedMemoryUnregisterRequest struct {
 	state         protoimpl.MessageState
@@ -2847,10 +2847,10 @@ type SystemSharedMemoryUnregisterRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The name of the system region to unregister. If empty
-	// @@     all system shared-memory regions are unregistered.
+	// @@ The name of the system region to unregister. If empty
+	// @@ all system shared-memory regions are unregistered.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
@@ -2897,7 +2897,7 @@ func (x *SystemSharedMemoryUnregisterRequest) GetName() string {
 // @@
 // @@.. cpp:var:: message SystemSharedMemoryUnregisterResponse
 // @@
-// @@   Response message for SystemSharedMemoryUnregister.
+// @@ Response message for SystemSharedMemoryUnregister.
 // @@
 type SystemSharedMemoryUnregisterResponse struct {
 	state         protoimpl.MessageState
@@ -2940,7 +2940,7 @@ func (*SystemSharedMemoryUnregisterResponse) Descriptor() ([]byte, []int) {
 // @@
 // @@.. cpp:var:: message CudaSharedMemoryStatusRequest
 // @@
-// @@   Request message for CudaSharedMemoryStatus.
+// @@ Request message for CudaSharedMemoryStatus.
 // @@
 type CudaSharedMemoryStatusRequest struct {
 	state         protoimpl.MessageState
@@ -2948,10 +2948,10 @@ type CudaSharedMemoryStatusRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The name of the region to get status for. If empty the
-	// @@     status is returned for all registered regions.
+	// @@ The name of the region to get status for. If empty the
+	// @@ status is returned for all registered regions.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
@@ -2998,7 +2998,7 @@ func (x *CudaSharedMemoryStatusRequest) GetName() string {
 // @@
 // @@.. cpp:var:: message CudaSharedMemoryStatusResponse
 // @@
-// @@   Response message for CudaSharedMemoryStatus.
+// @@ Response message for CudaSharedMemoryStatus.
 // @@
 type CudaSharedMemoryStatusResponse struct {
 	state         protoimpl.MessageState
@@ -3006,10 +3006,10 @@ type CudaSharedMemoryStatusResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: map<string,RegionStatus> regions
+	// @@ .. cpp:var:: map<string,RegionStatus> regions
 	// @@
-	// @@     Status for each of the registered regions, indexed by
-	// @@     region name.
+	// @@ Status for each of the registered regions, indexed by
+	// @@ region name.
 	// @@
 	Regions map[string]*CudaSharedMemoryStatusResponse_RegionStatus `protobuf:"bytes,1,rep,name=regions,proto3" json:"regions,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
@@ -3056,7 +3056,7 @@ func (x *CudaSharedMemoryStatusResponse) GetRegions() map[string]*CudaSharedMemo
 // @@
 // @@.. cpp:var:: message CudaSharedMemoryRegisterRequest
 // @@
-// @@   Request message for CudaSharedMemoryRegister.
+// @@ Request message for CudaSharedMemoryRegister.
 // @@
 type CudaSharedMemoryRegisterRequest struct {
 	state         protoimpl.MessageState
@@ -3064,24 +3064,24 @@ type CudaSharedMemoryRegisterRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The name of the region to register.
+	// @@ The name of the region to register.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// @@  .. cpp:var:: bytes raw_handle
+	// @@ .. cpp:var:: bytes raw_handle
 	// @@
-	// @@     The raw serialized cudaIPC handle.
+	// @@ The raw serialized cudaIPC handle.
 	// @@
 	RawHandle []byte `protobuf:"bytes,2,opt,name=raw_handle,json=rawHandle,proto3" json:"raw_handle,omitempty"`
-	// @@  .. cpp:var:: int64 device_id
+	// @@ .. cpp:var:: int64 device_id
 	// @@
-	// @@     The GPU device ID on which the cudaIPC handle was created.
+	// @@ The GPU device ID on which the cudaIPC handle was created.
 	// @@
 	DeviceId int64 `protobuf:"varint,3,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	// @@  .. cpp:var:: uint64 byte_size
+	// @@ .. cpp:var:: uint64 byte_size
 	// @@
-	// @@     Size of the shared memory block, in bytes.
+	// @@ Size of the shared memory block, in bytes.
 	// @@
 	ByteSize uint64 `protobuf:"varint,4,opt,name=byte_size,json=byteSize,proto3" json:"byte_size,omitempty"`
 }
@@ -3149,7 +3149,7 @@ func (x *CudaSharedMemoryRegisterRequest) GetByteSize() uint64 {
 // @@
 // @@.. cpp:var:: message CudaSharedMemoryRegisterResponse
 // @@
-// @@   Response message for CudaSharedMemoryRegister.
+// @@ Response message for CudaSharedMemoryRegister.
 // @@
 type CudaSharedMemoryRegisterResponse struct {
 	state         protoimpl.MessageState
@@ -3192,7 +3192,7 @@ func (*CudaSharedMemoryRegisterResponse) Descriptor() ([]byte, []int) {
 // @@
 // @@.. cpp:var:: message CudaSharedMemoryUnregisterRequest
 // @@
-// @@   Request message for CudaSharedMemoryUnregister.
+// @@ Request message for CudaSharedMemoryUnregister.
 // @@
 type CudaSharedMemoryUnregisterRequest struct {
 	state         protoimpl.MessageState
@@ -3200,10 +3200,10 @@ type CudaSharedMemoryUnregisterRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@  .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@     The name of the cuda region to unregister. If empty
-	// @@     all cuda shared-memory regions are unregistered.
+	// @@ The name of the cuda region to unregister. If empty
+	// @@ all cuda shared-memory regions are unregistered.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
@@ -3250,7 +3250,7 @@ func (x *CudaSharedMemoryUnregisterRequest) GetName() string {
 // @@
 // @@.. cpp:var:: message CudaSharedMemoryUnregisterResponse
 // @@
-// @@   Response message for CudaSharedMemoryUnregister.
+// @@ Response message for CudaSharedMemoryUnregister.
 // @@
 type CudaSharedMemoryUnregisterResponse struct {
 	state         protoimpl.MessageState
@@ -3293,24 +3293,24 @@ func (*CudaSharedMemoryUnregisterResponse) Descriptor() ([]byte, []int) {
 // @@
 // @@.. cpp:var:: message TraceSettingRequest
 // @@
-// @@   Request message for TraceSetting.
+// @@ Request message for TraceSetting.
 // @@
 type TraceSettingRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: map<string,SettingValue> settings
+	// @@ .. cpp:var:: map<string,SettingValue> settings
 	// @@
-	// @@     The new setting values to be updated,
-	// @@     settings that are not specified will remain unchanged.
+	// @@ The new setting values to be updated,
+	// @@ settings that are not specified will remain unchanged.
 	// @@
 	Settings map[string]*TraceSettingRequest_SettingValue `protobuf:"bytes,1,rep,name=settings,proto3" json:"settings,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// @@
-	// @@  .. cpp:var:: string model_name
+	// @@ .. cpp:var:: string model_name
 	// @@
-	// @@     The name of the model to apply the new trace settings.
-	// @@     If not given, the new settings will be applied globally.
+	// @@ The name of the model to apply the new trace settings.
+	// @@ If not given, the new settings will be applied globally.
 	// @@
 	ModelName string `protobuf:"bytes,2,opt,name=model_name,json=modelName,proto3" json:"model_name,omitempty"`
 }
@@ -3364,17 +3364,17 @@ func (x *TraceSettingRequest) GetModelName() string {
 // @@
 // @@.. cpp:var:: message TraceSettingResponse
 // @@
-// @@   Response message for TraceSetting.
+// @@ Response message for TraceSetting.
 // @@
 type TraceSettingResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: map<string,SettingValue> settings
+	// @@ .. cpp:var:: map<string,SettingValue> settings
 	// @@
-	// @@     The current trace settings, including any changes specified
-	// @@     by TraceSettingRequest.
+	// @@ The current trace settings, including any changes specified
+	// @@ by TraceSettingRequest.
 	// @@
 	Settings map[string]*TraceSettingResponse_SettingValue `protobuf:"bytes,1,rep,name=settings,proto3" json:"settings,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
@@ -3421,16 +3421,16 @@ func (x *TraceSettingResponse) GetSettings() map[string]*TraceSettingResponse_Se
 // @@
 // @@.. cpp:var:: message LogSettingsRequest
 // @@
-// @@   Request message for LogSettings.
+// @@ Request message for LogSettings.
 // @@
 type LogSettingsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: map<string,SettingValue> settings
+	// @@ .. cpp:var:: map<string,SettingValue> settings
 	// @@
-	// @@     The current log settings.
+	// @@ The current log settings.
 	// @@
 	Settings map[string]*LogSettingsRequest_SettingValue `protobuf:"bytes,1,rep,name=settings,proto3" json:"settings,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
@@ -3477,16 +3477,16 @@ func (x *LogSettingsRequest) GetSettings() map[string]*LogSettingsRequest_Settin
 // @@
 // @@.. cpp:var:: message LogSettingsResponse
 // @@
-// @@   Response message for LogSettings.
+// @@ Response message for LogSettings.
 // @@
 type LogSettingsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// @@  .. cpp:var:: map<string,SettingValue> settings
+	// @@ .. cpp:var:: map<string,SettingValue> settings
 	// @@
-	// @@     The current log settings.
+	// @@ The current log settings.
 	// @@
 	Settings map[string]*LogSettingsResponse_SettingValue `protobuf:"bytes,1,rep,name=settings,proto3" json:"settings,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
@@ -3531,9 +3531,9 @@ func (x *LogSettingsResponse) GetSettings() map[string]*LogSettingsResponse_Sett
 }
 
 // @@
-// @@  .. cpp:var:: message TensorMetadata
+// @@ .. cpp:var:: message TensorMetadata
 // @@
-// @@     Metadata for a tensor.
+// @@ Metadata for a tensor.
 // @@
 type ModelMetadataResponse_TensorMetadata struct {
 	state         protoimpl.MessageState
@@ -3541,22 +3541,22 @@ type ModelMetadataResponse_TensorMetadata struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@    .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@       The tensor name.
+	// @@ The tensor name.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// @@
-	// @@    .. cpp:var:: string datatype
+	// @@ .. cpp:var:: string datatype
 	// @@
-	// @@       The tensor data type.
+	// @@ The tensor data type.
 	// @@
 	Datatype string `protobuf:"bytes,2,opt,name=datatype,proto3" json:"datatype,omitempty"`
 	// @@
-	// @@    .. cpp:var:: int64 shape (repeated)
+	// @@ .. cpp:var:: int64 shape (repeated)
 	// @@
-	// @@       The tensor shape. A variable-size dimension is represented
-	// @@       by a -1 value.
+	// @@ The tensor shape. A variable-size dimension is represented
+	// @@ by a -1 value.
 	// @@
 	Shape []int64 `protobuf:"varint,3,rep,packed,name=shape,proto3" json:"shape,omitempty"`
 }
@@ -3615,9 +3615,9 @@ func (x *ModelMetadataResponse_TensorMetadata) GetShape() []int64 {
 }
 
 // @@
-// @@  .. cpp:var:: message InferInputTensor
+// @@ .. cpp:var:: message InferInputTensor
 // @@
-// @@     An input tensor for an inference request.
+// @@ An input tensor for an inference request.
 // @@
 type ModelInferRequest_InferInputTensor struct {
 	state         protoimpl.MessageState
@@ -3625,33 +3625,33 @@ type ModelInferRequest_InferInputTensor struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@    .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@       The tensor name.
+	// @@ The tensor name.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// @@
-	// @@    .. cpp:var:: string datatype
+	// @@ .. cpp:var:: string datatype
 	// @@
-	// @@       The tensor data type.
+	// @@ The tensor data type.
 	// @@
 	Datatype string `protobuf:"bytes,2,opt,name=datatype,proto3" json:"datatype,omitempty"`
 	// @@
-	// @@    .. cpp:var:: int64 shape (repeated)
+	// @@ .. cpp:var:: int64 shape (repeated)
 	// @@
-	// @@       The tensor shape.
+	// @@ The tensor shape.
 	// @@
 	Shape []int64 `protobuf:"varint,3,rep,packed,name=shape,proto3" json:"shape,omitempty"`
-	// @@    .. cpp:var:: map<string,InferParameter> parameters
+	// @@ .. cpp:var:: map<string,InferParameter> parameters
 	// @@
-	// @@       Optional inference input tensor parameters.
+	// @@ Optional inference input tensor parameters.
 	// @@
 	Parameters map[string]*InferParameter `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// @@    .. cpp:var:: InferTensorContents contents
+	// @@ .. cpp:var:: InferTensorContents contents
 	// @@
-	// @@       The tensor contents using a data-type format. This field
-	// @@       must not be specified if tensor contents are being specified
-	// @@       in ModelInferRequest.raw_input_contents.
+	// @@ The tensor contents using a data-type format. This field
+	// @@ must not be specified if tensor contents are being specified
+	// @@ in ModelInferRequest.raw_input_contents.
 	// @@
 	Contents *InferTensorContents `protobuf:"bytes,5,opt,name=contents,proto3" json:"contents,omitempty"`
 }
@@ -3724,9 +3724,9 @@ func (x *ModelInferRequest_InferInputTensor) GetContents() *InferTensorContents 
 }
 
 // @@
-// @@  .. cpp:var:: message InferRequestedOutputTensor
+// @@ .. cpp:var:: message InferRequestedOutputTensor
 // @@
-// @@     An output tensor requested for an inference request.
+// @@ An output tensor requested for an inference request.
 // @@
 type ModelInferRequest_InferRequestedOutputTensor struct {
 	state         protoimpl.MessageState
@@ -3734,14 +3734,14 @@ type ModelInferRequest_InferRequestedOutputTensor struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@    .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@       The tensor name.
+	// @@ The tensor name.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// @@    .. cpp:var:: map<string,InferParameter> parameters
+	// @@ .. cpp:var:: map<string,InferParameter> parameters
 	// @@
-	// @@       Optional requested output tensor parameters.
+	// @@ Optional requested output tensor parameters.
 	// @@
 	Parameters map[string]*InferParameter `protobuf:"bytes,2,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
@@ -3793,9 +3793,9 @@ func (x *ModelInferRequest_InferRequestedOutputTensor) GetParameters() map[strin
 }
 
 // @@
-// @@  .. cpp:var:: message InferOutputTensor
+// @@ .. cpp:var:: message InferOutputTensor
 // @@
-// @@     An output tensor returned for an inference request.
+// @@ An output tensor returned for an inference request.
 // @@
 type ModelInferResponse_InferOutputTensor struct {
 	state         protoimpl.MessageState
@@ -3803,33 +3803,33 @@ type ModelInferResponse_InferOutputTensor struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@    .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@       The tensor name.
+	// @@ The tensor name.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// @@
-	// @@    .. cpp:var:: string datatype
+	// @@ .. cpp:var:: string datatype
 	// @@
-	// @@       The tensor data type.
+	// @@ The tensor data type.
 	// @@
 	Datatype string `protobuf:"bytes,2,opt,name=datatype,proto3" json:"datatype,omitempty"`
 	// @@
-	// @@    .. cpp:var:: int64 shape (repeated)
+	// @@ .. cpp:var:: int64 shape (repeated)
 	// @@
-	// @@       The tensor shape.
+	// @@ The tensor shape.
 	// @@
 	Shape []int64 `protobuf:"varint,3,rep,packed,name=shape,proto3" json:"shape,omitempty"`
-	// @@    .. cpp:var:: map<string,InferParameter> parameters
+	// @@ .. cpp:var:: map<string,InferParameter> parameters
 	// @@
-	// @@       Optional output tensor parameters.
+	// @@ Optional output tensor parameters.
 	// @@
 	Parameters map[string]*InferParameter `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// @@    .. cpp:var:: InferTensorContents contents
+	// @@ .. cpp:var:: InferTensorContents contents
 	// @@
-	// @@       The tensor contents using a data-type format. This field
-	// @@       must not be specified if tensor contents are being specified
-	// @@       in ModelInferResponse.raw_output_contents.
+	// @@ The tensor contents using a data-type format. This field
+	// @@ must not be specified if tensor contents are being specified
+	// @@ in ModelInferResponse.raw_output_contents.
 	// @@
 	Contents *InferTensorContents `protobuf:"bytes,5,opt,name=contents,proto3" json:"contents,omitempty"`
 }
@@ -3902,9 +3902,9 @@ func (x *ModelInferResponse_InferOutputTensor) GetContents() *InferTensorContent
 }
 
 // @@
-// @@  .. cpp:var:: message ModelIndex
+// @@ .. cpp:var:: message ModelIndex
 // @@
-// @@     Index entry for a model.
+// @@ Index entry for a model.
 // @@
 type RepositoryIndexResponse_ModelIndex struct {
 	state         protoimpl.MessageState
@@ -3912,26 +3912,26 @@ type RepositoryIndexResponse_ModelIndex struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@    .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@       The name of the model.
+	// @@ The name of the model.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// @@    .. cpp:var:: string version
+	// @@ .. cpp:var:: string version
 	// @@
-	// @@       The version of the model.
+	// @@ The version of the model.
 	// @@
 	Version string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	// @@
-	// @@    .. cpp:var:: string state
+	// @@ .. cpp:var:: string state
 	// @@
-	// @@       The state of the model.
+	// @@ The state of the model.
 	// @@
 	State string `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`
 	// @@
-	// @@    .. cpp:var:: string reason
+	// @@ .. cpp:var:: string reason
 	// @@
-	// @@       The reason, if any, that the model is in the given state.
+	// @@ The reason, if any, that the model is in the given state.
 	// @@
 	Reason string `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
 }
@@ -3997,9 +3997,9 @@ func (x *RepositoryIndexResponse_ModelIndex) GetReason() string {
 }
 
 // @@
-// @@  .. cpp:var:: message RegionStatus
+// @@ .. cpp:var:: message RegionStatus
 // @@
-// @@     Status for a shared memory region.
+// @@ Status for a shared memory region.
 // @@
 type SystemSharedMemoryStatusResponse_RegionStatus struct {
 	state         protoimpl.MessageState
@@ -4007,26 +4007,26 @@ type SystemSharedMemoryStatusResponse_RegionStatus struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@    .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@       The name for the shared memory region.
+	// @@ The name for the shared memory region.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// @@    .. cpp:var:: string shared_memory_key
+	// @@ .. cpp:var:: string shared_memory_key
 	// @@
-	// @@       The key of the underlying memory object that contains the
-	// @@       shared memory region.
+	// @@ The key of the underlying memory object that contains the
+	// @@ shared memory region.
 	// @@
 	Key string `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
-	// @@    .. cpp:var:: uint64 offset
+	// @@ .. cpp:var:: uint64 offset
 	// @@
-	// @@       Offset, in bytes, within the underlying memory object to
-	// @@       the start of the shared memory region.
+	// @@ Offset, in bytes, within the underlying memory object to
+	// @@ the start of the shared memory region.
 	// @@
 	Offset uint64 `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	// @@    .. cpp:var:: uint64 byte_size
+	// @@ .. cpp:var:: uint64 byte_size
 	// @@
-	// @@       Size of the shared memory region, in bytes.
+	// @@ Size of the shared memory region, in bytes.
 	// @@
 	ByteSize uint64 `protobuf:"varint,4,opt,name=byte_size,json=byteSize,proto3" json:"byte_size,omitempty"`
 }
@@ -4092,9 +4092,9 @@ func (x *SystemSharedMemoryStatusResponse_RegionStatus) GetByteSize() uint64 {
 }
 
 // @@
-// @@  .. cpp:var:: message RegionStatus
+// @@ .. cpp:var:: message RegionStatus
 // @@
-// @@     Status for a shared memory region.
+// @@ Status for a shared memory region.
 // @@
 type CudaSharedMemoryStatusResponse_RegionStatus struct {
 	state         protoimpl.MessageState
@@ -4102,19 +4102,19 @@ type CudaSharedMemoryStatusResponse_RegionStatus struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@    .. cpp:var:: string name
+	// @@ .. cpp:var:: string name
 	// @@
-	// @@       The name for the shared memory region.
+	// @@ The name for the shared memory region.
 	// @@
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// @@    .. cpp:var:: uin64 device_id
+	// @@ .. cpp:var:: uin64 device_id
 	// @@
-	// @@       The GPU device ID where the cudaIPC handle was created.
+	// @@ The GPU device ID where the cudaIPC handle was created.
 	// @@
 	DeviceId uint64 `protobuf:"varint,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	// @@    .. cpp:var:: uint64 byte_size
+	// @@ .. cpp:var:: uint64 byte_size
 	// @@
-	// @@       Size of the shared memory region, in bytes.
+	// @@ Size of the shared memory region, in bytes.
 	// @@
 	ByteSize uint64 `protobuf:"varint,3,opt,name=byte_size,json=byteSize,proto3" json:"byte_size,omitempty"`
 }
@@ -4173,11 +4173,11 @@ func (x *CudaSharedMemoryStatusResponse_RegionStatus) GetByteSize() uint64 {
 }
 
 // @@
-// @@  .. cpp:var:: message SettingValue
+// @@ .. cpp:var:: message SettingValue
 // @@
-// @@     The values to be associated with a trace setting.
-// @@     If no value is provided, the setting will be clear and
-// @@     the global setting value will be used.
+// @@ The values to be associated with a trace setting.
+// @@ If no value is provided, the setting will be clear and
+// @@ the global setting value will be used.
 // @@
 type TraceSettingRequest_SettingValue struct {
 	state         protoimpl.MessageState
@@ -4185,9 +4185,9 @@ type TraceSettingRequest_SettingValue struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@    .. cpp:var:: string value (repeated)
+	// @@ .. cpp:var:: string value (repeated)
 	// @@
-	// @@       The value.
+	// @@ The value.
 	// @@
 	Value []string `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
 }
@@ -4232,9 +4232,9 @@ func (x *TraceSettingRequest_SettingValue) GetValue() []string {
 }
 
 // @@
-// @@  .. cpp:var:: message SettingValue
+// @@ .. cpp:var:: message SettingValue
 // @@
-// @@     The values to be associated with a trace setting.
+// @@ The values to be associated with a trace setting.
 // @@
 type TraceSettingResponse_SettingValue struct {
 	state         protoimpl.MessageState
@@ -4242,9 +4242,9 @@ type TraceSettingResponse_SettingValue struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @@
-	// @@    .. cpp:var:: string value (repeated)
+	// @@ .. cpp:var:: string value (repeated)
 	// @@
-	// @@       The value.
+	// @@ The value.
 	// @@
 	Value []string `protobuf:"bytes,1,rep,name=value,proto3" json:"value,omitempty"`
 }
@@ -4366,25 +4366,25 @@ type isLogSettingsRequest_SettingValue_ParameterChoice interface {
 }
 
 type LogSettingsRequest_SettingValue_BoolParam struct {
-	// @@    .. cpp:var:: bool bool_param
+	// @@ .. cpp:var:: bool bool_param
 	// @@
-	// @@       A boolean parameter value.
+	// @@ A boolean parameter value.
 	// @@
 	BoolParam bool `protobuf:"varint,1,opt,name=bool_param,json=boolParam,proto3,oneof"`
 }
 
 type LogSettingsRequest_SettingValue_Uint32Param struct {
-	// @@    .. cpp:var:: uint32 uint32_param
+	// @@ .. cpp:var:: uint32 uint32_param
 	// @@
-	// @@       An uint32 parameter value.
+	// @@ An uint32 parameter value.
 	// @@
 	Uint32Param uint32 `protobuf:"varint,2,opt,name=uint32_param,json=uint32Param,proto3,oneof"`
 }
 
 type LogSettingsRequest_SettingValue_StringParam struct {
-	// @@    .. cpp:var:: string string_param
+	// @@ .. cpp:var:: string string_param
 	// @@
-	// @@       A string parameter value.
+	// @@ A string parameter value.
 	// @@
 	StringParam string `protobuf:"bytes,3,opt,name=string_param,json=stringParam,proto3,oneof"`
 }
@@ -4476,25 +4476,25 @@ type isLogSettingsResponse_SettingValue_ParameterChoice interface {
 }
 
 type LogSettingsResponse_SettingValue_BoolParam struct {
-	// @@    .. cpp:var:: bool bool_param
+	// @@ .. cpp:var:: bool bool_param
 	// @@
-	// @@       A boolean parameter value.
+	// @@ A boolean parameter value.
 	// @@
 	BoolParam bool `protobuf:"varint,1,opt,name=bool_param,json=boolParam,proto3,oneof"`
 }
 
 type LogSettingsResponse_SettingValue_Uint32Param struct {
-	// @@    .. cpp:var:: uint32 uint32_param
+	// @@ .. cpp:var:: uint32 uint32_param
 	// @@
-	// @@       An int32 parameter value.
+	// @@ An int32 parameter value.
 	// @@
 	Uint32Param uint32 `protobuf:"varint,2,opt,name=uint32_param,json=uint32Param,proto3,oneof"`
 }
 
 type LogSettingsResponse_SettingValue_StringParam struct {
-	// @@    .. cpp:var:: string string_param
+	// @@ .. cpp:var:: string string_param
 	// @@
-	// @@       A string parameter value.
+	// @@ A string parameter value.
 	// @@
 	StringParam string `protobuf:"bytes,3,opt,name=string_param,json=stringParam,proto3,oneof"`
 }

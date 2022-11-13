@@ -1,0 +1,10 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {
+            "name": "Curt-Park",
+            "email": "www.jwpark.co.kr@gmail.com"
+        }
+    },
+    "paths": {}
+}

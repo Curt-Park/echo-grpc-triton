@@ -4,7 +4,7 @@
 // - protoc             v3.21.9
 // source: grpc_service.proto
 
-package __
+package main
 
 import (
 	context "context"
@@ -22,131 +22,131 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GRPCInferenceServiceClient interface {
-	// @@  .. cpp:var:: rpc ServerLive(ServerLiveRequest) returns
-	// @@       (ServerLiveResponse)
+	// @@ .. cpp:var:: rpc ServerLive(ServerLiveRequest) returns
+	// @@ (ServerLiveResponse)
 	// @@
-	// @@     Check liveness of the inference server.
+	// @@ Check liveness of the inference server.
 	// @@
 	ServerLive(ctx context.Context, in *ServerLiveRequest, opts ...grpc.CallOption) (*ServerLiveResponse, error)
-	// @@  .. cpp:var:: rpc ServerReady(ServerReadyRequest) returns
-	// @@       (ServerReadyResponse)
+	// @@ .. cpp:var:: rpc ServerReady(ServerReadyRequest) returns
+	// @@ (ServerReadyResponse)
 	// @@
-	// @@     Check readiness of the inference server.
+	// @@ Check readiness of the inference server.
 	// @@
 	ServerReady(ctx context.Context, in *ServerReadyRequest, opts ...grpc.CallOption) (*ServerReadyResponse, error)
-	// @@  .. cpp:var:: rpc ModelReady(ModelReadyRequest) returns
-	// @@       (ModelReadyResponse)
+	// @@ .. cpp:var:: rpc ModelReady(ModelReadyRequest) returns
+	// @@ (ModelReadyResponse)
 	// @@
-	// @@     Check readiness of a model in the inference server.
+	// @@ Check readiness of a model in the inference server.
 	// @@
 	ModelReady(ctx context.Context, in *ModelReadyRequest, opts ...grpc.CallOption) (*ModelReadyResponse, error)
-	// @@  .. cpp:var:: rpc ServerMetadata(ServerMetadataRequest) returns
-	// @@       (ServerMetadataResponse)
+	// @@ .. cpp:var:: rpc ServerMetadata(ServerMetadataRequest) returns
+	// @@ (ServerMetadataResponse)
 	// @@
-	// @@     Get server metadata.
+	// @@ Get server metadata.
 	// @@
 	ServerMetadata(ctx context.Context, in *ServerMetadataRequest, opts ...grpc.CallOption) (*ServerMetadataResponse, error)
-	// @@  .. cpp:var:: rpc ModelMetadata(ModelMetadataRequest) returns
-	// @@       (ModelMetadataResponse)
+	// @@ .. cpp:var:: rpc ModelMetadata(ModelMetadataRequest) returns
+	// @@ (ModelMetadataResponse)
 	// @@
-	// @@     Get model metadata.
+	// @@ Get model metadata.
 	// @@
 	ModelMetadata(ctx context.Context, in *ModelMetadataRequest, opts ...grpc.CallOption) (*ModelMetadataResponse, error)
-	// @@  .. cpp:var:: rpc ModelInfer(ModelInferRequest) returns
-	// @@       (ModelInferResponse)
+	// @@ .. cpp:var:: rpc ModelInfer(ModelInferRequest) returns
+	// @@ (ModelInferResponse)
 	// @@
-	// @@     Perform inference using a specific model.
+	// @@ Perform inference using a specific model.
 	// @@
 	ModelInfer(ctx context.Context, in *ModelInferRequest, opts ...grpc.CallOption) (*ModelInferResponse, error)
-	// @@  .. cpp:var:: rpc ModelStreamInfer(stream ModelInferRequest) returns
-	// @@       (stream ModelStreamInferResponse)
+	// @@ .. cpp:var:: rpc ModelStreamInfer(stream ModelInferRequest) returns
+	// @@ (stream ModelStreamInferResponse)
 	// @@
-	// @@     Perform streaming inference.
+	// @@ Perform streaming inference.
 	// @@
 	ModelStreamInfer(ctx context.Context, opts ...grpc.CallOption) (GRPCInferenceService_ModelStreamInferClient, error)
-	// @@  .. cpp:var:: rpc ModelConfig(ModelConfigRequest) returns
-	// @@       (ModelConfigResponse)
+	// @@ .. cpp:var:: rpc ModelConfig(ModelConfigRequest) returns
+	// @@ (ModelConfigResponse)
 	// @@
-	// @@     Get model configuration.
+	// @@ Get model configuration.
 	// @@
 	ModelConfig(ctx context.Context, in *ModelConfigRequest, opts ...grpc.CallOption) (*ModelConfigResponse, error)
-	// @@  .. cpp:var:: rpc ModelStatistics(
-	// @@                     ModelStatisticsRequest)
-	// @@                   returns (ModelStatisticsResponse)
+	// @@ .. cpp:var:: rpc ModelStatistics(
+	// @@ ModelStatisticsRequest)
+	// @@ returns (ModelStatisticsResponse)
 	// @@
-	// @@     Get the cumulative inference statistics for a model.
+	// @@ Get the cumulative inference statistics for a model.
 	// @@
 	ModelStatistics(ctx context.Context, in *ModelStatisticsRequest, opts ...grpc.CallOption) (*ModelStatisticsResponse, error)
-	// @@  .. cpp:var:: rpc RepositoryIndex(RepositoryIndexRequest) returns
-	// @@       (RepositoryIndexResponse)
+	// @@ .. cpp:var:: rpc RepositoryIndex(RepositoryIndexRequest) returns
+	// @@ (RepositoryIndexResponse)
 	// @@
-	// @@     Get the index of model repository contents.
+	// @@ Get the index of model repository contents.
 	// @@
 	RepositoryIndex(ctx context.Context, in *RepositoryIndexRequest, opts ...grpc.CallOption) (*RepositoryIndexResponse, error)
-	// @@  .. cpp:var:: rpc RepositoryModelLoad(RepositoryModelLoadRequest) returns
-	// @@       (RepositoryModelLoadResponse)
+	// @@ .. cpp:var:: rpc RepositoryModelLoad(RepositoryModelLoadRequest) returns
+	// @@ (RepositoryModelLoadResponse)
 	// @@
-	// @@     Load or reload a model from a repository.
+	// @@ Load or reload a model from a repository.
 	// @@
 	RepositoryModelLoad(ctx context.Context, in *RepositoryModelLoadRequest, opts ...grpc.CallOption) (*RepositoryModelLoadResponse, error)
-	// @@  .. cpp:var:: rpc RepositoryModelUnload(RepositoryModelUnloadRequest)
-	// @@       returns (RepositoryModelUnloadResponse)
+	// @@ .. cpp:var:: rpc RepositoryModelUnload(RepositoryModelUnloadRequest)
+	// @@ returns (RepositoryModelUnloadResponse)
 	// @@
-	// @@     Unload a model.
+	// @@ Unload a model.
 	// @@
 	RepositoryModelUnload(ctx context.Context, in *RepositoryModelUnloadRequest, opts ...grpc.CallOption) (*RepositoryModelUnloadResponse, error)
-	// @@  .. cpp:var:: rpc SystemSharedMemoryStatus(
-	// @@                     SystemSharedMemoryStatusRequest)
-	// @@                   returns (SystemSharedMemoryStatusRespose)
+	// @@ .. cpp:var:: rpc SystemSharedMemoryStatus(
+	// @@ SystemSharedMemoryStatusRequest)
+	// @@ returns (SystemSharedMemoryStatusRespose)
 	// @@
-	// @@     Get the status of all registered system-shared-memory regions.
+	// @@ Get the status of all registered system-shared-memory regions.
 	// @@
 	SystemSharedMemoryStatus(ctx context.Context, in *SystemSharedMemoryStatusRequest, opts ...grpc.CallOption) (*SystemSharedMemoryStatusResponse, error)
-	// @@  .. cpp:var:: rpc SystemSharedMemoryRegister(
-	// @@                     SystemSharedMemoryRegisterRequest)
-	// @@                   returns (SystemSharedMemoryRegisterResponse)
+	// @@ .. cpp:var:: rpc SystemSharedMemoryRegister(
+	// @@ SystemSharedMemoryRegisterRequest)
+	// @@ returns (SystemSharedMemoryRegisterResponse)
 	// @@
-	// @@     Register a system-shared-memory region.
+	// @@ Register a system-shared-memory region.
 	// @@
 	SystemSharedMemoryRegister(ctx context.Context, in *SystemSharedMemoryRegisterRequest, opts ...grpc.CallOption) (*SystemSharedMemoryRegisterResponse, error)
-	// @@  .. cpp:var:: rpc SystemSharedMemoryUnregister(
-	// @@                     SystemSharedMemoryUnregisterRequest)
-	// @@                   returns (SystemSharedMemoryUnregisterResponse)
+	// @@ .. cpp:var:: rpc SystemSharedMemoryUnregister(
+	// @@ SystemSharedMemoryUnregisterRequest)
+	// @@ returns (SystemSharedMemoryUnregisterResponse)
 	// @@
-	// @@     Unregister a system-shared-memory region.
+	// @@ Unregister a system-shared-memory region.
 	// @@
 	SystemSharedMemoryUnregister(ctx context.Context, in *SystemSharedMemoryUnregisterRequest, opts ...grpc.CallOption) (*SystemSharedMemoryUnregisterResponse, error)
-	// @@  .. cpp:var:: rpc CudaSharedMemoryStatus(
-	// @@                     CudaSharedMemoryStatusRequest)
-	// @@                   returns (CudaSharedMemoryStatusRespose)
+	// @@ .. cpp:var:: rpc CudaSharedMemoryStatus(
+	// @@ CudaSharedMemoryStatusRequest)
+	// @@ returns (CudaSharedMemoryStatusRespose)
 	// @@
-	// @@     Get the status of all registered CUDA-shared-memory regions.
+	// @@ Get the status of all registered CUDA-shared-memory regions.
 	// @@
 	CudaSharedMemoryStatus(ctx context.Context, in *CudaSharedMemoryStatusRequest, opts ...grpc.CallOption) (*CudaSharedMemoryStatusResponse, error)
-	// @@  .. cpp:var:: rpc CudaSharedMemoryRegister(
-	// @@                     CudaSharedMemoryRegisterRequest)
-	// @@                   returns (CudaSharedMemoryRegisterResponse)
+	// @@ .. cpp:var:: rpc CudaSharedMemoryRegister(
+	// @@ CudaSharedMemoryRegisterRequest)
+	// @@ returns (CudaSharedMemoryRegisterResponse)
 	// @@
-	// @@     Register a CUDA-shared-memory region.
+	// @@ Register a CUDA-shared-memory region.
 	// @@
 	CudaSharedMemoryRegister(ctx context.Context, in *CudaSharedMemoryRegisterRequest, opts ...grpc.CallOption) (*CudaSharedMemoryRegisterResponse, error)
-	// @@  .. cpp:var:: rpc CudaSharedMemoryUnregister(
-	// @@                     CudaSharedMemoryUnregisterRequest)
-	// @@                   returns (CudaSharedMemoryUnregisterResponse)
+	// @@ .. cpp:var:: rpc CudaSharedMemoryUnregister(
+	// @@ CudaSharedMemoryUnregisterRequest)
+	// @@ returns (CudaSharedMemoryUnregisterResponse)
 	// @@
-	// @@     Unregister a CUDA-shared-memory region.
+	// @@ Unregister a CUDA-shared-memory region.
 	// @@
 	CudaSharedMemoryUnregister(ctx context.Context, in *CudaSharedMemoryUnregisterRequest, opts ...grpc.CallOption) (*CudaSharedMemoryUnregisterResponse, error)
-	// @@  .. cpp:var:: rpc TraceSetting(TraceSettingRequest)
-	// @@                   returns (TraceSettingResponse)
+	// @@ .. cpp:var:: rpc TraceSetting(TraceSettingRequest)
+	// @@ returns (TraceSettingResponse)
 	// @@
-	// @@     Update and get the trace setting of the Triton server.
+	// @@ Update and get the trace setting of the Triton server.
 	// @@
 	TraceSetting(ctx context.Context, in *TraceSettingRequest, opts ...grpc.CallOption) (*TraceSettingResponse, error)
-	// @@  .. cpp:var:: rpc LogSettings(LogSettingsRequest)
-	// @@                   returns (LogSettingsResponse)
+	// @@ .. cpp:var:: rpc LogSettings(LogSettingsRequest)
+	// @@ returns (LogSettingsResponse)
 	// @@
-	// @@     Update and get the log settings of the Triton server.
+	// @@ Update and get the log settings of the Triton server.
 	// @@
 	LogSettings(ctx context.Context, in *LogSettingsRequest, opts ...grpc.CallOption) (*LogSettingsResponse, error)
 }
@@ -365,131 +365,131 @@ func (c *gRPCInferenceServiceClient) LogSettings(ctx context.Context, in *LogSet
 // All implementations must embed UnimplementedGRPCInferenceServiceServer
 // for forward compatibility
 type GRPCInferenceServiceServer interface {
-	// @@  .. cpp:var:: rpc ServerLive(ServerLiveRequest) returns
-	// @@       (ServerLiveResponse)
+	// @@ .. cpp:var:: rpc ServerLive(ServerLiveRequest) returns
+	// @@ (ServerLiveResponse)
 	// @@
-	// @@     Check liveness of the inference server.
+	// @@ Check liveness of the inference server.
 	// @@
 	ServerLive(context.Context, *ServerLiveRequest) (*ServerLiveResponse, error)
-	// @@  .. cpp:var:: rpc ServerReady(ServerReadyRequest) returns
-	// @@       (ServerReadyResponse)
+	// @@ .. cpp:var:: rpc ServerReady(ServerReadyRequest) returns
+	// @@ (ServerReadyResponse)
 	// @@
-	// @@     Check readiness of the inference server.
+	// @@ Check readiness of the inference server.
 	// @@
 	ServerReady(context.Context, *ServerReadyRequest) (*ServerReadyResponse, error)
-	// @@  .. cpp:var:: rpc ModelReady(ModelReadyRequest) returns
-	// @@       (ModelReadyResponse)
+	// @@ .. cpp:var:: rpc ModelReady(ModelReadyRequest) returns
+	// @@ (ModelReadyResponse)
 	// @@
-	// @@     Check readiness of a model in the inference server.
+	// @@ Check readiness of a model in the inference server.
 	// @@
 	ModelReady(context.Context, *ModelReadyRequest) (*ModelReadyResponse, error)
-	// @@  .. cpp:var:: rpc ServerMetadata(ServerMetadataRequest) returns
-	// @@       (ServerMetadataResponse)
+	// @@ .. cpp:var:: rpc ServerMetadata(ServerMetadataRequest) returns
+	// @@ (ServerMetadataResponse)
 	// @@
-	// @@     Get server metadata.
+	// @@ Get server metadata.
 	// @@
 	ServerMetadata(context.Context, *ServerMetadataRequest) (*ServerMetadataResponse, error)
-	// @@  .. cpp:var:: rpc ModelMetadata(ModelMetadataRequest) returns
-	// @@       (ModelMetadataResponse)
+	// @@ .. cpp:var:: rpc ModelMetadata(ModelMetadataRequest) returns
+	// @@ (ModelMetadataResponse)
 	// @@
-	// @@     Get model metadata.
+	// @@ Get model metadata.
 	// @@
 	ModelMetadata(context.Context, *ModelMetadataRequest) (*ModelMetadataResponse, error)
-	// @@  .. cpp:var:: rpc ModelInfer(ModelInferRequest) returns
-	// @@       (ModelInferResponse)
+	// @@ .. cpp:var:: rpc ModelInfer(ModelInferRequest) returns
+	// @@ (ModelInferResponse)
 	// @@
-	// @@     Perform inference using a specific model.
+	// @@ Perform inference using a specific model.
 	// @@
 	ModelInfer(context.Context, *ModelInferRequest) (*ModelInferResponse, error)
-	// @@  .. cpp:var:: rpc ModelStreamInfer(stream ModelInferRequest) returns
-	// @@       (stream ModelStreamInferResponse)
+	// @@ .. cpp:var:: rpc ModelStreamInfer(stream ModelInferRequest) returns
+	// @@ (stream ModelStreamInferResponse)
 	// @@
-	// @@     Perform streaming inference.
+	// @@ Perform streaming inference.
 	// @@
 	ModelStreamInfer(GRPCInferenceService_ModelStreamInferServer) error
-	// @@  .. cpp:var:: rpc ModelConfig(ModelConfigRequest) returns
-	// @@       (ModelConfigResponse)
+	// @@ .. cpp:var:: rpc ModelConfig(ModelConfigRequest) returns
+	// @@ (ModelConfigResponse)
 	// @@
-	// @@     Get model configuration.
+	// @@ Get model configuration.
 	// @@
 	ModelConfig(context.Context, *ModelConfigRequest) (*ModelConfigResponse, error)
-	// @@  .. cpp:var:: rpc ModelStatistics(
-	// @@                     ModelStatisticsRequest)
-	// @@                   returns (ModelStatisticsResponse)
+	// @@ .. cpp:var:: rpc ModelStatistics(
+	// @@ ModelStatisticsRequest)
+	// @@ returns (ModelStatisticsResponse)
 	// @@
-	// @@     Get the cumulative inference statistics for a model.
+	// @@ Get the cumulative inference statistics for a model.
 	// @@
 	ModelStatistics(context.Context, *ModelStatisticsRequest) (*ModelStatisticsResponse, error)
-	// @@  .. cpp:var:: rpc RepositoryIndex(RepositoryIndexRequest) returns
-	// @@       (RepositoryIndexResponse)
+	// @@ .. cpp:var:: rpc RepositoryIndex(RepositoryIndexRequest) returns
+	// @@ (RepositoryIndexResponse)
 	// @@
-	// @@     Get the index of model repository contents.
+	// @@ Get the index of model repository contents.
 	// @@
 	RepositoryIndex(context.Context, *RepositoryIndexRequest) (*RepositoryIndexResponse, error)
-	// @@  .. cpp:var:: rpc RepositoryModelLoad(RepositoryModelLoadRequest) returns
-	// @@       (RepositoryModelLoadResponse)
+	// @@ .. cpp:var:: rpc RepositoryModelLoad(RepositoryModelLoadRequest) returns
+	// @@ (RepositoryModelLoadResponse)
 	// @@
-	// @@     Load or reload a model from a repository.
+	// @@ Load or reload a model from a repository.
 	// @@
 	RepositoryModelLoad(context.Context, *RepositoryModelLoadRequest) (*RepositoryModelLoadResponse, error)
-	// @@  .. cpp:var:: rpc RepositoryModelUnload(RepositoryModelUnloadRequest)
-	// @@       returns (RepositoryModelUnloadResponse)
+	// @@ .. cpp:var:: rpc RepositoryModelUnload(RepositoryModelUnloadRequest)
+	// @@ returns (RepositoryModelUnloadResponse)
 	// @@
-	// @@     Unload a model.
+	// @@ Unload a model.
 	// @@
 	RepositoryModelUnload(context.Context, *RepositoryModelUnloadRequest) (*RepositoryModelUnloadResponse, error)
-	// @@  .. cpp:var:: rpc SystemSharedMemoryStatus(
-	// @@                     SystemSharedMemoryStatusRequest)
-	// @@                   returns (SystemSharedMemoryStatusRespose)
+	// @@ .. cpp:var:: rpc SystemSharedMemoryStatus(
+	// @@ SystemSharedMemoryStatusRequest)
+	// @@ returns (SystemSharedMemoryStatusRespose)
 	// @@
-	// @@     Get the status of all registered system-shared-memory regions.
+	// @@ Get the status of all registered system-shared-memory regions.
 	// @@
 	SystemSharedMemoryStatus(context.Context, *SystemSharedMemoryStatusRequest) (*SystemSharedMemoryStatusResponse, error)
-	// @@  .. cpp:var:: rpc SystemSharedMemoryRegister(
-	// @@                     SystemSharedMemoryRegisterRequest)
-	// @@                   returns (SystemSharedMemoryRegisterResponse)
+	// @@ .. cpp:var:: rpc SystemSharedMemoryRegister(
+	// @@ SystemSharedMemoryRegisterRequest)
+	// @@ returns (SystemSharedMemoryRegisterResponse)
 	// @@
-	// @@     Register a system-shared-memory region.
+	// @@ Register a system-shared-memory region.
 	// @@
 	SystemSharedMemoryRegister(context.Context, *SystemSharedMemoryRegisterRequest) (*SystemSharedMemoryRegisterResponse, error)
-	// @@  .. cpp:var:: rpc SystemSharedMemoryUnregister(
-	// @@                     SystemSharedMemoryUnregisterRequest)
-	// @@                   returns (SystemSharedMemoryUnregisterResponse)
+	// @@ .. cpp:var:: rpc SystemSharedMemoryUnregister(
+	// @@ SystemSharedMemoryUnregisterRequest)
+	// @@ returns (SystemSharedMemoryUnregisterResponse)
 	// @@
-	// @@     Unregister a system-shared-memory region.
+	// @@ Unregister a system-shared-memory region.
 	// @@
 	SystemSharedMemoryUnregister(context.Context, *SystemSharedMemoryUnregisterRequest) (*SystemSharedMemoryUnregisterResponse, error)
-	// @@  .. cpp:var:: rpc CudaSharedMemoryStatus(
-	// @@                     CudaSharedMemoryStatusRequest)
-	// @@                   returns (CudaSharedMemoryStatusRespose)
+	// @@ .. cpp:var:: rpc CudaSharedMemoryStatus(
+	// @@ CudaSharedMemoryStatusRequest)
+	// @@ returns (CudaSharedMemoryStatusRespose)
 	// @@
-	// @@     Get the status of all registered CUDA-shared-memory regions.
+	// @@ Get the status of all registered CUDA-shared-memory regions.
 	// @@
 	CudaSharedMemoryStatus(context.Context, *CudaSharedMemoryStatusRequest) (*CudaSharedMemoryStatusResponse, error)
-	// @@  .. cpp:var:: rpc CudaSharedMemoryRegister(
-	// @@                     CudaSharedMemoryRegisterRequest)
-	// @@                   returns (CudaSharedMemoryRegisterResponse)
+	// @@ .. cpp:var:: rpc CudaSharedMemoryRegister(
+	// @@ CudaSharedMemoryRegisterRequest)
+	// @@ returns (CudaSharedMemoryRegisterResponse)
 	// @@
-	// @@     Register a CUDA-shared-memory region.
+	// @@ Register a CUDA-shared-memory region.
 	// @@
 	CudaSharedMemoryRegister(context.Context, *CudaSharedMemoryRegisterRequest) (*CudaSharedMemoryRegisterResponse, error)
-	// @@  .. cpp:var:: rpc CudaSharedMemoryUnregister(
-	// @@                     CudaSharedMemoryUnregisterRequest)
-	// @@                   returns (CudaSharedMemoryUnregisterResponse)
+	// @@ .. cpp:var:: rpc CudaSharedMemoryUnregister(
+	// @@ CudaSharedMemoryUnregisterRequest)
+	// @@ returns (CudaSharedMemoryUnregisterResponse)
 	// @@
-	// @@     Unregister a CUDA-shared-memory region.
+	// @@ Unregister a CUDA-shared-memory region.
 	// @@
 	CudaSharedMemoryUnregister(context.Context, *CudaSharedMemoryUnregisterRequest) (*CudaSharedMemoryUnregisterResponse, error)
-	// @@  .. cpp:var:: rpc TraceSetting(TraceSettingRequest)
-	// @@                   returns (TraceSettingResponse)
+	// @@ .. cpp:var:: rpc TraceSetting(TraceSettingRequest)
+	// @@ returns (TraceSettingResponse)
 	// @@
-	// @@     Update and get the trace setting of the Triton server.
+	// @@ Update and get the trace setting of the Triton server.
 	// @@
 	TraceSetting(context.Context, *TraceSettingRequest) (*TraceSettingResponse, error)
-	// @@  .. cpp:var:: rpc LogSettings(LogSettingsRequest)
-	// @@                   returns (LogSettingsResponse)
+	// @@ .. cpp:var:: rpc LogSettings(LogSettingsRequest)
+	// @@ returns (LogSettingsResponse)
 	// @@
-	// @@     Update and get the log settings of the Triton server.
+	// @@ Update and get the log settings of the Triton server.
 	// @@
 	LogSettings(context.Context, *LogSettingsRequest) (*LogSettingsResponse, error)
 	mustEmbedUnimplementedGRPCInferenceServiceServer()
