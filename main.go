@@ -70,6 +70,7 @@ func main() {
 	e.GET("/model-stats", getModelInferStats)
 	e.POST("/model-load", loadModel)
 	e.POST("/model-unload", unloadModel)
+	e.POST("/infer", infer)
 
 	// Swagger
 	e.GET("/docs/*", echoSwagger.WrapHandler)
@@ -77,7 +78,7 @@ func main() {
 }
 
 // @Summary     Healthcheck
-// @Description It returns true if the api server is alive
+// @Description It returns true if the api server is alive.
 // @Accept      json
 // @Produce     json
 // @Success     200 {object} bool "API server's liveness"
@@ -86,8 +87,8 @@ func getHealthCheck(c echo.Context) error {
 	return c.JSON(http.StatusOK, true)
 }
 
-// @Summary     Check Triton's liveness
-// @Description It returns true if the triton server is alive
+// @Summary     Check Triton's liveness.
+// @Description It returns true if the triton server is alive.
 // @Accept      json
 // @Produce     json
 // @Success     200 {object} bool "Triton server's liveness"
@@ -104,8 +105,8 @@ func getServerLiveness(c echo.Context) error {
 	return c.JSON(http.StatusOK, serverLiveResponse.Live)
 }
 
-// @Summary     Check Triton's Readiness
-// @Description It returns true if the triton server is ready
+// @Summary     Check Triton's Readiness.
+// @Description It returns true if the triton server is ready.
 // @Accept      json
 // @Produce     json
 // @Success     200 {object} bool "Triton server's readiness"
@@ -122,7 +123,7 @@ func getServerReadiness(c echo.Context) error {
 	return c.JSON(http.StatusOK, serverReadyResponse.Ready)
 }
 
-// @Summary     Get model metadata
+// @Summary     Get model metadata.
 // @Description It returns the requested model metadata
 // @Accept      json
 // @Produce     json
@@ -142,8 +143,8 @@ func getModelMetadata(c echo.Context) error {
 	return c.JSON(http.StatusOK, modelMetadataResponse)
 }
 
-// @Summary     Get model inference statistics
-// @Description It returns the requested model's inference statistics
+// @Summary     Get model inference statistics.
+// @Description It returns the requested model's inference statistics.
 // @Accept      json
 // @Produce     json
 // @Param       model   query    string                  true  "model name"
@@ -162,7 +163,7 @@ func getModelInferStats(c echo.Context) error {
 	return c.JSON(http.StatusOK, modelStatisticsResponse)
 }
 
-// @Summary     Load a model
+// @Summary     Load a model.
 // @Description It requests to load a model. This is only allowed when polling is enabled.
 // @Accept      json
 // @Produce     json
@@ -181,7 +182,7 @@ func loadModel(c echo.Context) error {
 	return c.JSON(http.StatusOK, modelLoadResponse)
 }
 
-// @Summary     Unload a model
+// @Summary     Unload a model.
 // @Description It requests to unload a model. This is only allowed when polling is enabled.
 // @Accept      json
 // @Produce     json
@@ -198,4 +199,52 @@ func unloadModel(c echo.Context) error {
 		return err
 	}
 	return c.JSON(http.StatusOK, modelUnloadResponse)
+}
+
+// @Summary     model inference api for the model with bytes a input and a bytes output.
+// @Description It outputs a single bytes with a single bytes input.
+// @Accept      json
+// @Produce     json
+// @Param       model   formData string             true  "model name"
+// @Param       file    formData file               true  "input"
+// @Param       version formData string             false "model version"
+// @Success     200     {object} ModelInferResponse "Triton server's inference response"
+// @Router      /infer [post]
+func infer(c echo.Context) error {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(flags.TIMEOUT)*time.Second)
+	defer cancel()
+
+	// Get the model information
+	modelName := c.FormValue("name")
+	modelVersion := c.FormValue("version")
+	// Get the file
+	file, err := c.FormFile("file")
+	if err != nil {
+		return err
+	}
+	rawInput, err := file.Open()
+	if err != nil {
+		return err
+	}
+	defer rawInput.Close()
+
+	// Create request input / output tensors
+	inferInputs := []*ModelInferRequest_InferInputTensor{{Name: "INPUT0", Datatype: "BYTES", Shape: []int64{1, 16}}}
+	inferOutputs := []*ModelInferRequest_InferRequestedOutputTensor{{Name: "OUTPUT0"}}
+
+	// Create a request
+	modelInferRequest := ModelInferRequest{
+		ModelName:        modelName,
+		ModelVersion:     modelVersion,
+		Inputs:           inferInputs,
+		Outputs:          inferOutputs,
+		RawInputContents: rawInput,
+	}
+
+	// Get infer response
+	modelInferResponse, err := client.grpc.ModelInfer(ctx, &modelInferRequest)
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, modelInferResponse)
 }

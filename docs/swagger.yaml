@@ -37,6 +37,13 @@ definitions:
           @@ tensor data from the GPU.
           @@
     type: object
+  main.InferParameter:
+    properties:
+      parameterChoice:
+        description: "@@ .. cpp:var:: oneof parameter_choice\n@@\n@@ The parameter
+          value can be a string, an int64 or\n@@ a boolean\n@@\n\nTypes that are assignable
+          to ParameterChoice:\n\n\t*InferParameter_BoolParam\n\t*InferParameter_Int64Param\n\t*InferParameter_StringParam"
+    type: object
   main.InferStatistics:
     properties:
       cache_hit:
@@ -133,6 +140,229 @@ definitions:
           @@ request. The "success" count and cumulative duration includes
           @@ cache hits.
           @@
+    type: object
+  main.InferTensorContents:
+    properties:
+      bool_contents:
+        description: |-
+          @@
+          @@ .. cpp:var:: bool bool_contents (repeated)
+          @@
+          @@ Representation for BOOL data type. The size must match what is
+          @@ expected by the tensor's shape. The contents must be the flattened,
+          @@ one-dimensional, row-major order of the tensor elements.
+          @@
+        items:
+          type: boolean
+        type: array
+      bytes_contents:
+        description: |-
+          @@
+          @@ .. cpp:var:: bytes bytes_contents (repeated)
+          @@
+          @@ Representation for BYTES data type. The size must match what is
+          @@ expected by the tensor's shape. The contents must be the flattened,
+          @@ one-dimensional, row-major order of the tensor elements.
+          @@
+        items:
+          items:
+            type: integer
+          type: array
+        type: array
+      fp32_contents:
+        description: |-
+          @@
+          @@ .. cpp:var:: float fp32_contents (repeated)
+          @@
+          @@ Representation for FP32 data type. The size must match what is
+          @@ expected by the tensor's shape. The contents must be the flattened,
+          @@ one-dimensional, row-major order of the tensor elements.
+          @@
+        items:
+          type: number
+        type: array
+      fp64_contents:
+        description: |-
+          @@
+          @@ .. cpp:var:: double fp64_contents (repeated)
+          @@
+          @@ Representation for FP64 data type. The size must match what is
+          @@ expected by the tensor's shape. The contents must be the flattened,
+          @@ one-dimensional, row-major order of the tensor elements.
+          @@
+        items:
+          type: number
+        type: array
+      int_contents:
+        description: |-
+          @@
+          @@ .. cpp:var:: int32 int_contents (repeated)
+          @@
+          @@ Representation for INT8, INT16, and INT32 data types. The size
+          @@ must match what is expected by the tensor's shape. The contents
+          @@ must be the flattened, one-dimensional, row-major order of the
+          @@ tensor elements.
+          @@
+        items:
+          type: integer
+        type: array
+      int64_contents:
+        description: |-
+          @@
+          @@ .. cpp:var:: int64 int64_contents (repeated)
+          @@
+          @@ Representation for INT64 data types. The size must match what
+          @@ is expected by the tensor's shape. The contents must be the
+          @@ flattened, one-dimensional, row-major order of the tensor elements.
+          @@
+        items:
+          type: integer
+        type: array
+      uint_contents:
+        description: |-
+          @@
+          @@ .. cpp:var:: uint32 uint_contents (repeated)
+          @@
+          @@ Representation for UINT8, UINT16, and UINT32 data types. The size
+          @@ must match what is expected by the tensor's shape. The contents
+          @@ must be the flattened, one-dimensional, row-major order of the
+          @@ tensor elements.
+          @@
+        items:
+          type: integer
+        type: array
+      uint64_contents:
+        description: |-
+          @@
+          @@ .. cpp:var:: uint64 uint64_contents (repeated)
+          @@
+          @@ Representation for UINT64 data types. The size must match what
+          @@ is expected by the tensor's shape. The contents must be the
+          @@ flattened, one-dimensional, row-major order of the tensor elements.
+          @@
+        items:
+          type: integer
+        type: array
+    type: object
+  main.ModelInferResponse:
+    properties:
+      id:
+        description: |-
+          @@ .. cpp:var:: string id
+          @@
+          @@ The id of the inference request if one was specified.
+          @@
+        type: string
+      model_name:
+        description: |-
+          @@ .. cpp:var:: string model_name
+          @@
+          @@ The name of the model used for inference.
+          @@
+        type: string
+      model_version:
+        description: |-
+          @@ .. cpp:var:: string model_version
+          @@
+          @@ The version of the model used for inference.
+          @@
+        type: string
+      outputs:
+        description: |-
+          @@
+          @@ .. cpp:var:: InferOutputTensor outputs (repeated)
+          @@
+          @@ The output tensors holding inference results.
+          @@
+        items:
+          $ref: '#/definitions/main.ModelInferResponse_InferOutputTensor'
+        type: array
+      parameters:
+        additionalProperties:
+          $ref: '#/definitions/main.InferParameter'
+        description: |-
+          @@ .. cpp:var:: map<string,InferParameter> parameters
+          @@
+          @@ Optional inference response parameters.
+          @@
+        type: object
+      raw_output_contents:
+        description: |-
+          @@
+          @@ .. cpp:var:: bytes raw_output_contents
+          @@
+          @@ The data contained in an output tensor can be represented in
+          @@ "raw" bytes form or in the repeated type that matches the
+          @@ tensor's data type. Using the "raw" bytes form will
+          @@ typically allow higher performance due to the way protobuf
+          @@ allocation and reuse interacts with GRPC. For example, see
+          @@ https://github.com/grpc/grpc/issues/23231.
+          @@
+          @@ To use the raw representation 'raw_output_contents' must be
+          @@ initialized with data for each tensor in the same order as
+          @@ 'outputs'. For each tensor, the size of this content must
+          @@ match what is expected by the tensor's shape and data
+          @@ type. The raw data must be the flattened, one-dimensional,
+          @@ row-major order of the tensor elements without any stride
+          @@ or padding between the elements. Note that the FP16 and BF16 data
+          @@ types must be represented as raw content as there is no
+          @@ specific data type for a 16-bit float type.
+          @@
+          @@ If this field is specified then InferOutputTensor::contents
+          @@ must not be specified for any output tensor.
+          @@
+        items:
+          items:
+            type: integer
+          type: array
+        type: array
+    type: object
+  main.ModelInferResponse_InferOutputTensor:
+    properties:
+      contents:
+        $ref: '#/definitions/main.InferTensorContents'
+        description: |-
+          @@ .. cpp:var:: InferTensorContents contents
+          @@
+          @@ The tensor contents using a data-type format. This field
+          @@ must not be specified if tensor contents are being specified
+          @@ in ModelInferResponse.raw_output_contents.
+          @@
+      datatype:
+        description: |-
+          @@
+          @@ .. cpp:var:: string datatype
+          @@
+          @@ The tensor data type.
+          @@
+        type: string
+      name:
+        description: |-
+          @@
+          @@ .. cpp:var:: string name
+          @@
+          @@ The tensor name.
+          @@
+        type: string
+      parameters:
+        additionalProperties:
+          $ref: '#/definitions/main.InferParameter'
+        description: |-
+          @@ .. cpp:var:: map<string,InferParameter> parameters
+          @@
+          @@ Optional output tensor parameters.
+          @@
+        type: object
+      shape:
+        description: |-
+          @@
+          @@ .. cpp:var:: int64 shape (repeated)
+          @@
+          @@ The tensor shape.
+          @@
+        items:
+          type: integer
+        type: array
     type: object
   main.ModelMetadataResponse:
     properties:
@@ -330,7 +560,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: It returns true if the api server is alive
+      description: It returns true if the api server is alive.
       produces:
       - application/json
       responses:
@@ -343,7 +573,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: It returns true if the triton server is alive
+      description: It returns true if the triton server is alive.
       produces:
       - application/json
       responses:
@@ -351,7 +581,7 @@ paths:
           description: Triton server's liveness
           schema:
             type: boolean
-      summary: Check Triton's liveness
+      summary: Check Triton's liveness.
   /model-load:
     post:
       consumes:
@@ -371,7 +601,7 @@ paths:
           description: Triton server's model load response
           schema:
             $ref: '#/definitions/main.RepositoryModelLoadResponse'
-      summary: Load a model
+      summary: Load a model.
   /model-metadata:
     get:
       consumes:
@@ -394,12 +624,12 @@ paths:
           description: Triton server's model metadata
           schema:
             $ref: '#/definitions/main.ModelMetadataResponse'
-      summary: Get model metadata
+      summary: Get model metadata.
   /model-stats:
     get:
       consumes:
       - application/json
-      description: It returns the requested model's inference statistics
+      description: It returns the requested model's inference statistics.
       parameters:
       - description: model name
         in: query
@@ -417,7 +647,7 @@ paths:
           description: Triton server's model statistics
           schema:
             $ref: '#/definitions/main.ModelStatisticsResponse'
-      summary: Get model inference statistics
+      summary: Get model inference statistics.
   /model-unload:
     post:
       consumes:
@@ -437,12 +667,12 @@ paths:
           description: Triton server's model unload response
           schema:
             $ref: '#/definitions/main.RepositoryModelUnloadResponse'
-      summary: Unload a model
+      summary: Unload a model.
   /readiness:
     get:
       consumes:
       - application/json
-      description: It returns true if the triton server is ready
+      description: It returns true if the triton server is ready.
       produces:
       - application/json
       responses:
@@ -450,5 +680,33 @@ paths:
           description: Triton server's readiness
           schema:
             type: boolean
-      summary: Check Triton's Readiness
+      summary: Check Triton's Readiness.
+  /simple-infer:
+    post:
+      consumes:
+      - application/json
+      description: It outputs a single bytes with a single bytes input.
+      parameters:
+      - description: model name
+        in: formData
+        name: model
+        required: true
+        type: string
+      - description: input
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: model version
+        in: formData
+        name: version
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Triton server's inference response
+          schema:
+            $ref: '#/definitions/main.ModelInferResponse'
+      summary: model inference api for the model with bytes a input and a bytes output.
 swagger: "2.0"

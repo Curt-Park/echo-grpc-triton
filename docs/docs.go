@@ -21,7 +21,7 @@ const docTemplate = `{
     "paths": {
         "/": {
             "get": {
-                "description": "It returns true if the api server is alive",
+                "description": "It returns true if the api server is alive.",
                 "consumes": [
                     "application/json"
                 ],
@@ -41,14 +41,14 @@ const docTemplate = `{
         },
         "/liveness": {
             "get": {
-                "description": "It returns true if the triton server is alive",
+                "description": "It returns true if the triton server is alive.",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Check Triton's liveness",
+                "summary": "Check Triton's liveness.",
                 "responses": {
                     "200": {
                         "description": "Triton server's liveness",
@@ -68,7 +68,7 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Load a model",
+                "summary": "Load a model.",
                 "parameters": [
                     {
                         "type": "string",
@@ -97,7 +97,7 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Get model metadata",
+                "summary": "Get model metadata.",
                 "parameters": [
                     {
                         "type": "string",
@@ -125,14 +125,14 @@ const docTemplate = `{
         },
         "/model-stats": {
             "get": {
-                "description": "It returns the requested model's inference statistics",
+                "description": "It returns the requested model's inference statistics.",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Get model inference statistics",
+                "summary": "Get model inference statistics.",
                 "parameters": [
                     {
                         "type": "string",
@@ -167,7 +167,7 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Unload a model",
+                "summary": "Unload a model.",
                 "parameters": [
                     {
                         "type": "string",
@@ -189,19 +189,61 @@ const docTemplate = `{
         },
         "/readiness": {
             "get": {
-                "description": "It returns true if the triton server is ready",
+                "description": "It returns true if the triton server is ready.",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Check Triton's Readiness",
+                "summary": "Check Triton's Readiness.",
                 "responses": {
                     "200": {
                         "description": "Triton server's readiness",
                         "schema": {
                             "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
+        "/simple-infer": {
+            "post": {
+                "description": "It outputs a single bytes with a single bytes input.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "model inference api for the model with bytes a input and a bytes output.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "model name",
+                        "name": "model",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "file",
+                        "description": "input",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "model version",
+                        "name": "version",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Triton server's inference response",
+                        "schema": {
+                            "$ref": "#/definitions/main.ModelInferResponse"
                         }
                     }
                 }
@@ -227,6 +269,14 @@ const docTemplate = `{
                 "compute_output": {
                     "description": "@@ .. cpp:var:: StatisticDuration compute_output\n@@\n@@ The count and cumulative duration to extract output tensor data\n@@ produced by the model framework / backend with the given batch size.\n@@ For example, this duration should include the time to copy output\n@@ tensor data from the GPU.\n@@",
                     "$ref": "#/definitions/main.StatisticDuration"
+                }
+            }
+        },
+        "main.InferParameter": {
+            "type": "object",
+            "properties": {
+                "parameterChoice": {
+                    "description": "@@ .. cpp:var:: oneof parameter_choice\n@@\n@@ The parameter value can be a string, an int64 or\n@@ a boolean\n@@\n\nTypes that are assignable to ParameterChoice:\n\n\t*InferParameter_BoolParam\n\t*InferParameter_Int64Param\n\t*InferParameter_StringParam"
                 }
             }
         },
@@ -264,6 +314,142 @@ const docTemplate = `{
                 "success": {
                     "description": "@@ .. cpp:var:: StatisticDuration success\n@@\n@@ Cumulative count and duration for successful inference\n@@ request. The \"success\" count and cumulative duration includes\n@@ cache hits.\n@@",
                     "$ref": "#/definitions/main.StatisticDuration"
+                }
+            }
+        },
+        "main.InferTensorContents": {
+            "type": "object",
+            "properties": {
+                "bool_contents": {
+                    "description": "@@\n@@ .. cpp:var:: bool bool_contents (repeated)\n@@\n@@ Representation for BOOL data type. The size must match what is\n@@ expected by the tensor's shape. The contents must be the flattened,\n@@ one-dimensional, row-major order of the tensor elements.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "boolean"
+                    }
+                },
+                "bytes_contents": {
+                    "description": "@@\n@@ .. cpp:var:: bytes bytes_contents (repeated)\n@@\n@@ Representation for BYTES data type. The size must match what is\n@@ expected by the tensor's shape. The contents must be the flattened,\n@@ one-dimensional, row-major order of the tensor elements.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "fp32_contents": {
+                    "description": "@@\n@@ .. cpp:var:: float fp32_contents (repeated)\n@@\n@@ Representation for FP32 data type. The size must match what is\n@@ expected by the tensor's shape. The contents must be the flattened,\n@@ one-dimensional, row-major order of the tensor elements.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "fp64_contents": {
+                    "description": "@@\n@@ .. cpp:var:: double fp64_contents (repeated)\n@@\n@@ Representation for FP64 data type. The size must match what is\n@@ expected by the tensor's shape. The contents must be the flattened,\n@@ one-dimensional, row-major order of the tensor elements.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "int64_contents": {
+                    "description": "@@\n@@ .. cpp:var:: int64 int64_contents (repeated)\n@@\n@@ Representation for INT64 data types. The size must match what\n@@ is expected by the tensor's shape. The contents must be the\n@@ flattened, one-dimensional, row-major order of the tensor elements.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "int_contents": {
+                    "description": "@@\n@@ .. cpp:var:: int32 int_contents (repeated)\n@@\n@@ Representation for INT8, INT16, and INT32 data types. The size\n@@ must match what is expected by the tensor's shape. The contents\n@@ must be the flattened, one-dimensional, row-major order of the\n@@ tensor elements.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "uint64_contents": {
+                    "description": "@@\n@@ .. cpp:var:: uint64 uint64_contents (repeated)\n@@\n@@ Representation for UINT64 data types. The size must match what\n@@ is expected by the tensor's shape. The contents must be the\n@@ flattened, one-dimensional, row-major order of the tensor elements.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "uint_contents": {
+                    "description": "@@\n@@ .. cpp:var:: uint32 uint_contents (repeated)\n@@\n@@ Representation for UINT8, UINT16, and UINT32 data types. The size\n@@ must match what is expected by the tensor's shape. The contents\n@@ must be the flattened, one-dimensional, row-major order of the\n@@ tensor elements.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "main.ModelInferResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "@@ .. cpp:var:: string id\n@@\n@@ The id of the inference request if one was specified.\n@@",
+                    "type": "string"
+                },
+                "model_name": {
+                    "description": "@@ .. cpp:var:: string model_name\n@@\n@@ The name of the model used for inference.\n@@",
+                    "type": "string"
+                },
+                "model_version": {
+                    "description": "@@ .. cpp:var:: string model_version\n@@\n@@ The version of the model used for inference.\n@@",
+                    "type": "string"
+                },
+                "outputs": {
+                    "description": "@@\n@@ .. cpp:var:: InferOutputTensor outputs (repeated)\n@@\n@@ The output tensors holding inference results.\n@@",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.ModelInferResponse_InferOutputTensor"
+                    }
+                },
+                "parameters": {
+                    "description": "@@ .. cpp:var:: map\u003cstring,InferParameter\u003e parameters\n@@\n@@ Optional inference response parameters.\n@@",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/main.InferParameter"
+                    }
+                },
+                "raw_output_contents": {
+                    "description": "@@\n@@ .. cpp:var:: bytes raw_output_contents\n@@\n@@ The data contained in an output tensor can be represented in\n@@ \"raw\" bytes form or in the repeated type that matches the\n@@ tensor's data type. Using the \"raw\" bytes form will\n@@ typically allow higher performance due to the way protobuf\n@@ allocation and reuse interacts with GRPC. For example, see\n@@ https://github.com/grpc/grpc/issues/23231.\n@@\n@@ To use the raw representation 'raw_output_contents' must be\n@@ initialized with data for each tensor in the same order as\n@@ 'outputs'. For each tensor, the size of this content must\n@@ match what is expected by the tensor's shape and data\n@@ type. The raw data must be the flattened, one-dimensional,\n@@ row-major order of the tensor elements without any stride\n@@ or padding between the elements. Note that the FP16 and BF16 data\n@@ types must be represented as raw content as there is no\n@@ specific data type for a 16-bit float type.\n@@\n@@ If this field is specified then InferOutputTensor::contents\n@@ must not be specified for any output tensor.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        },
+        "main.ModelInferResponse_InferOutputTensor": {
+            "type": "object",
+            "properties": {
+                "contents": {
+                    "description": "@@ .. cpp:var:: InferTensorContents contents\n@@\n@@ The tensor contents using a data-type format. This field\n@@ must not be specified if tensor contents are being specified\n@@ in ModelInferResponse.raw_output_contents.\n@@",
+                    "$ref": "#/definitions/main.InferTensorContents"
+                },
+                "datatype": {
+                    "description": "@@\n@@ .. cpp:var:: string datatype\n@@\n@@ The tensor data type.\n@@",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "@@\n@@ .. cpp:var:: string name\n@@\n@@ The tensor name.\n@@",
+                    "type": "string"
+                },
+                "parameters": {
+                    "description": "@@ .. cpp:var:: map\u003cstring,InferParameter\u003e parameters\n@@\n@@ Optional output tensor parameters.\n@@",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/main.InferParameter"
+                    }
+                },
+                "shape": {
+                    "description": "@@\n@@ .. cpp:var:: int64 shape (repeated)\n@@\n@@ The tensor shape.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
                 }
             }
         },
