@@ -3,7 +3,7 @@ A simple API server for Triton inference server powered by echo and gRPC.
 
 ## Prerequisites
 - Install [docker](https://docs.docker.com/engine/install/).
-- Install [go](https://go.dev/doc/install).
+- Install [go](https://go.dev/doc/install) (Optional: If you want to run this project without Docker).
 
 ## Commands
 ```bash
