@@ -66,8 +66,9 @@ func main() {
 
 	// APIs
 	e.GET("/", getHealthCheck)
-	e.GET("/is-server-live", getServerLiveness)
-	e.GET("/is-server-ready", getServerLiveness)
+	e.GET("/liveness", getServerLiveness)
+	e.GET("/readiness", getServerLiveness)
+	e.GET("/model-metadata", getModelMetadata)
 
 	// Swagger
 	e.GET("/docs/*", echoSwagger.WrapHandler)
@@ -89,7 +90,7 @@ func getHealthCheck(c echo.Context) error {
 // @Accept      json
 // @Produce     json
 // @Success     200 {object} bool "Triton server's liveness"
-// @Router      /is-server-live [get]
+// @Router      /liveness [get]
 func getServerLiveness(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(flags.TIMEOUT)*time.Second)
 	defer cancel()
@@ -107,7 +108,7 @@ func getServerLiveness(c echo.Context) error {
 // @Accept      json
 // @Produce     json
 // @Success     200 {object} bool "Triton server's readiness"
-// @Router      /is-server-ready [get]
+// @Router      /readiness [get]
 func getServerReadiness(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(flags.TIMEOUT)*time.Second)
 	defer cancel()
@@ -118,4 +119,33 @@ func getServerReadiness(c echo.Context) error {
 		return err
 	}
 	return c.JSON(http.StatusOK, serverReadyResponse.Ready)
+}
+
+// @Summary     Get model metadata
+// @Description It returns the requested model metadata
+// @Accept      json
+// @Produce     json
+// @Param       model   query    string true "model name"
+// @Param       version query    string false "model version"
+// @Success     200 {object} ModelMetadataResponse "Triton server's model metadata"
+// @Router      /model-metadata [get]
+func getModelMetadata(c echo.Context) error {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(flags.TIMEOUT)*time.Second)
+	defer cancel()
+
+    // Create status request for a given model
+    modelName := c.QueryParam("model")
+    modelVersion := c.QueryParam("version")
+    log.Println(modelName, modelVersion)
+    modelMetadataRequest := ModelMetadataRequest{
+        Name: modelName,
+        Version: modelVersion,
+    }
+
+    // Submit modelMetadata request to server
+    modelMetadataResponse, err := client.grpc.ModelMetadata(ctx, &modelMetadataRequest)
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, modelMetadataResponse)
 }

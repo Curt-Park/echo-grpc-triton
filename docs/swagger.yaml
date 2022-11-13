@@ -1,3 +1,83 @@
+definitions:
+  main.ModelMetadataResponse:
+    properties:
+      inputs:
+        description: |-
+          @@
+          @@ .. cpp:var:: TensorMetadata inputs (repeated)
+          @@
+          @@ The model's inputs.
+          @@
+        items:
+          $ref: '#/definitions/main.ModelMetadataResponse_TensorMetadata'
+        type: array
+      name:
+        description: |-
+          @@
+          @@ .. cpp:var:: string name
+          @@
+          @@ The model name.
+          @@
+        type: string
+      outputs:
+        description: |-
+          @@
+          @@ .. cpp:var:: TensorMetadata outputs (repeated)
+          @@
+          @@ The model's outputs.
+          @@
+        items:
+          $ref: '#/definitions/main.ModelMetadataResponse_TensorMetadata'
+        type: array
+      platform:
+        description: |-
+          @@
+          @@ .. cpp:var:: string platform
+          @@
+          @@ The model's platform.
+          @@
+        type: string
+      versions:
+        description: |-
+          @@
+          @@ .. cpp:var:: string versions (repeated)
+          @@
+          @@ The versions of the model.
+          @@
+        items:
+          type: string
+        type: array
+    type: object
+  main.ModelMetadataResponse_TensorMetadata:
+    properties:
+      datatype:
+        description: |-
+          @@
+          @@ .. cpp:var:: string datatype
+          @@
+          @@ The tensor data type.
+          @@
+        type: string
+      name:
+        description: |-
+          @@
+          @@ .. cpp:var:: string name
+          @@
+          @@ The tensor name.
+          @@
+        type: string
+      shape:
+        description: |-
+          @@
+          @@ .. cpp:var:: int64 shape (repeated)
+          @@
+          @@ The tensor shape. A variable-size dimension is represented
+          @@ by a -1 value.
+          @@
+        items:
+          type: integer
+        type: array
+    type: object
 info:
   contact:
     email: www.jwpark.co.kr@gmail.com
@@ -16,7 +96,7 @@ paths:
           schema:
             type: boolean
       summary: Healthcheck
-  /is-server-live:
+  /liveness:
     get:
       consumes:
       - application/json
@@ -29,7 +109,30 @@ paths:
           schema:
             type: boolean
       summary: Check Triton's liveness
-  /is-server-ready:
+  /model-metadata:
+    get:
+      consumes:
+      - application/json
+      description: It returns the requested model metadata
+      parameters:
+      - description: model name
+        in: query
+        name: model
+        required: true
+        type: string
+      - description: model version
+        in: query
+        name: version
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Triton server's model metadata
+          schema:
+            $ref: '#/definitions/main.ModelMetadataResponse'
+      summary: Get model metadata
+  /readiness:
     get:
       consumes:
       - application/json

@@ -27,7 +27,7 @@
                 }
             }
         },
-        "/is-server-live": {
+        "/liveness": {
             "get": {
                 "description": "It returns true if the triton server is alive",
                 "consumes": [
@@ -47,7 +47,42 @@
                 }
             }
         },
-        "/is-server-ready": {
+        "/model-metadata": {
+            "get": {
+                "description": "It returns the requested model metadata",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get model metadata",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "model name",
+                        "name": "model",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "model version",
+                        "name": "version",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Triton server's model metadata",
+                        "schema": {
+                            "$ref": "#/definitions/main.ModelMetadataResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/readiness": {
             "get": {
                 "description": "It returns true if the triton server is ready",
                 "consumes": [
@@ -63,6 +98,62 @@
                         "schema": {
                             "type": "boolean"
                         }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.ModelMetadataResponse": {
+            "type": "object",
+            "properties": {
+                "inputs": {
+                    "description": "@@\n@@ .. cpp:var:: TensorMetadata inputs (repeated)\n@@\n@@ The model's inputs.\n@@",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.ModelMetadataResponse_TensorMetadata"
+                    }
+                },
+                "name": {
+                    "description": "@@\n@@ .. cpp:var:: string name\n@@\n@@ The model name.\n@@",
+                    "type": "string"
+                },
+                "outputs": {
+                    "description": "@@\n@@ .. cpp:var:: TensorMetadata outputs (repeated)\n@@\n@@ The model's outputs.\n@@",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.ModelMetadataResponse_TensorMetadata"
+                    }
+                },
+                "platform": {
+                    "description": "@@\n@@ .. cpp:var:: string platform\n@@\n@@ The model's platform.\n@@",
+                    "type": "string"
+                },
+                "versions": {
+                    "description": "@@\n@@ .. cpp:var:: string versions (repeated)\n@@\n@@ The versions of the model.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "main.ModelMetadataResponse_TensorMetadata": {
+            "type": "object",
+            "properties": {
+                "datatype": {
+                    "description": "@@\n@@ .. cpp:var:: string datatype\n@@\n@@ The tensor data type.\n@@",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "@@\n@@ .. cpp:var:: string name\n@@\n@@ The tensor name.\n@@",
+                    "type": "string"
+                },
+                "shape": {
+                    "description": "@@\n@@ .. cpp:var:: int64 shape (repeated)\n@@\n@@ The tensor shape. A variable-size dimension is represented\n@@ by a -1 value.\n@@",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
                     }
                 }
             }
