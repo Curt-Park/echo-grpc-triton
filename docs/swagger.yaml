@@ -300,6 +300,10 @@ definitions:
           $ref: '#/definitions/main.ModelStatistics'
         type: array
     type: object
+  main.RepositoryModelLoadResponse:
+    type: object
+  main.RepositoryModelUnloadResponse:
+    type: object
   main.StatisticDuration:
     properties:
       count:
@@ -348,6 +352,26 @@ paths:
           schema:
             type: boolean
       summary: Check Triton's liveness
+  /model-load:
+    post:
+      consumes:
+      - application/json
+      description: It requests to load a model. This is only allowed when polling
+        is enabled.
+      parameters:
+      - description: model name
+        in: query
+        name: model
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Triton server's model load response
+          schema:
+            $ref: '#/definitions/main.RepositoryModelLoadResponse'
+      summary: Load a model
   /model-metadata:
     get:
       consumes:
@@ -394,6 +418,26 @@ paths:
           schema:
             $ref: '#/definitions/main.ModelStatisticsResponse'
       summary: Get model inference statistics
+  /model-unload:
+    post:
+      consumes:
+      - application/json
+      description: It requests to unload a model. This is only allowed when polling
+        is enabled.
+      parameters:
+      - description: model name
+        in: query
+        name: model
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Triton server's model unload response
+          schema:
+            $ref: '#/definitions/main.RepositoryModelUnloadResponse'
+      summary: Unload a model
   /readiness:
     get:
       consumes:

@@ -68,6 +68,8 @@ func main() {
 	e.GET("/readiness", getServerLiveness)
 	e.GET("/model-metadata", getModelMetadata)
 	e.GET("/model-stats", getModelInferStats)
+	e.POST("/model-load", loadModel)
+	e.POST("/model-unload", unloadModel)
 
 	// Swagger
 	e.GET("/docs/*", echoSwagger.WrapHandler)
@@ -158,4 +160,42 @@ func getModelInferStats(c echo.Context) error {
 		return err
 	}
 	return c.JSON(http.StatusOK, modelStatisticsResponse)
+}
+
+// @Summary     Load a model
+// @Description It requests to load a model. This is only allowed when polling is enabled.
+// @Accept      json
+// @Produce     json
+// @Param       model query    string                      true "model name"
+// @Success     200   {object} RepositoryModelLoadResponse "Triton server's model load response"
+// @Router      /model-load [post]
+func loadModel(c echo.Context) error {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(flags.TIMEOUT)*time.Second)
+	defer cancel()
+
+	modelLoadRequest := RepositoryModelLoadRequest{ModelName: c.QueryParam("model")}
+	modelLoadResponse, err := client.grpc.RepositoryModelLoad(ctx, &modelLoadRequest)
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, modelLoadResponse)
+}
+
+// @Summary     Unload a model
+// @Description It requests to unload a model. This is only allowed when polling is enabled.
+// @Accept      json
+// @Produce     json
+// @Param       model query    string                        true "model name"
+// @Success     200   {object} RepositoryModelUnloadResponse "Triton server's model unload response"
+// @Router      /model-unload [post]
+func unloadModel(c echo.Context) error {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(flags.TIMEOUT)*time.Second)
+	defer cancel()
+
+	modelUnloadRequest := RepositoryModelUnloadRequest{ModelName: c.QueryParam("model")}
+	modelUnloadResponse, err := client.grpc.RepositoryModelUnload(ctx, &modelUnloadRequest)
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, modelUnloadResponse)
 }

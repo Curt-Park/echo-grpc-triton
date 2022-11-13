@@ -59,6 +59,35 @@ const docTemplate = `{
                 }
             }
         },
+        "/model-load": {
+            "post": {
+                "description": "It requests to load a model. This is only allowed when polling is enabled.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Load a model",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "model name",
+                        "name": "model",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Triton server's model load response",
+                        "schema": {
+                            "$ref": "#/definitions/main.RepositoryModelLoadResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/model-metadata": {
             "get": {
                 "description": "It returns the requested model metadata",
@@ -124,6 +153,35 @@ const docTemplate = `{
                         "description": "Triton server's model statistics",
                         "schema": {
                             "$ref": "#/definitions/main.ModelStatisticsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/model-unload": {
+            "post": {
+                "description": "It requests to unload a model. This is only allowed when polling is enabled.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Unload a model",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "model name",
+                        "name": "model",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Triton server's model unload response",
+                        "schema": {
+                            "$ref": "#/definitions/main.RepositoryModelUnloadResponse"
                         }
                     }
                 }
@@ -310,6 +368,12 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "main.RepositoryModelLoadResponse": {
+            "type": "object"
+        },
+        "main.RepositoryModelUnloadResponse": {
+            "type": "object"
         },
         "main.StatisticDuration": {
             "type": "object",

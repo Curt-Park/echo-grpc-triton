@@ -4,3 +4,8 @@ triton-run:
 triton-kill:
 	docker stop tritonserver
 	docker rm tritonserver
+
+format:
+	go fmt
+	swag fmt
+	swag init
