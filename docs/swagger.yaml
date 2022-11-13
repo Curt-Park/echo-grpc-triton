@@ -553,8 +553,9 @@ definitions:
     type: object
 info:
   contact:
-    email: www.jwpark.co.kr@gmail.com
     name: Curt-Park
+    url: https://github.com/Curt-Park
+  title: Triton API Server with Triton gRPC Client
 paths:
   /:
     get:

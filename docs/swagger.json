@@ -1,9 +1,10 @@
 {
     "swagger": "2.0",
     "info": {
+        "title": "Triton API Server with Triton gRPC Client",
         "contact": {
             "name": "Curt-Park",
-            "email": "www.jwpark.co.kr@gmail.com"
+            "url": "https://github.com/Curt-Park"
         }
     },
     "paths": {

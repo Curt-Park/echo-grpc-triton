@@ -48,8 +48,9 @@ func (client *Client) connectToTriton(url string) {
 	client.grpc = NewGRPCInferenceServiceClient(conn)
 }
 
-// @contact.name  Curt-Park
-// @contact.email www.jwpark.co.kr@gmail.com
+// @title        Triton API Server with Triton gRPC Client
+// @contact.name Curt-Park
+// @contact.url  https://github.com/Curt-Park
 func main() {
 	// Parse the args
 	flags.parseFlags()

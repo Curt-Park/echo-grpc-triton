@@ -12,7 +12,7 @@ const docTemplate = `{
         "title": "{{.Title}}",
         "contact": {
             "name": "Curt-Park",
-            "email": "www.jwpark.co.kr@gmail.com"
+            "url": "https://github.com/Curt-Park"
         },
         "version": "{{.Version}}"
     },
@@ -583,7 +583,7 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "",
+	Title:            "Triton API Server with Triton gRPC Client",
 	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
