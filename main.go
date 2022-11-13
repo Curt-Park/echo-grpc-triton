@@ -33,8 +33,6 @@ var client = Client{}
 // parseFlags parses the arguments and initialize the flags.
 func (flags *Flags) parseFlags() {
 	// https://github.com/NVIDIA/triton-inference-server/tree/master/docs/examples/model_repository/simple
-	flag.StringVar(&flags.ModelName, "m", "simple", "Name of model being served. (Required)")
-	flag.StringVar(&flags.ModelVersion, "x", "", "Version of model. Default: Latest Version.")
 	flag.StringVar(&flags.URL, "u", "localhost:8001", "Inference Server URL. Default: localhost:8001")
 	flag.Int64Var(&flags.TIMEOUT, "t", 10, "Timeout. Default: 10 Sec.")
 	flag.Parse()
@@ -69,6 +67,7 @@ func main() {
 	e.GET("/liveness", getServerLiveness)
 	e.GET("/readiness", getServerLiveness)
 	e.GET("/model-metadata", getModelMetadata)
+	e.GET("/model-stats", getModelInferStats)
 
 	// Swagger
 	e.GET("/docs/*", echoSwagger.WrapHandler)
@@ -125,27 +124,38 @@ func getServerReadiness(c echo.Context) error {
 // @Description It returns the requested model metadata
 // @Accept      json
 // @Produce     json
-// @Param       model   query    string true "model name"
-// @Param       version query    string false "model version"
-// @Success     200 {object} ModelMetadataResponse "Triton server's model metadata"
+// @Param       model   query    string                true  "model name"
+// @Param       version query    string                false "model version"
+// @Success     200     {object} ModelMetadataResponse "Triton server's model metadata"
 // @Router      /model-metadata [get]
 func getModelMetadata(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(flags.TIMEOUT)*time.Second)
 	defer cancel()
 
-    // Create status request for a given model
-    modelName := c.QueryParam("model")
-    modelVersion := c.QueryParam("version")
-    log.Println(modelName, modelVersion)
-    modelMetadataRequest := ModelMetadataRequest{
-        Name: modelName,
-        Version: modelVersion,
-    }
-
-    // Submit modelMetadata request to server
-    modelMetadataResponse, err := client.grpc.ModelMetadata(ctx, &modelMetadataRequest)
+	modelMetadataRequest := ModelMetadataRequest{Name: c.QueryParam("model"), Version: c.QueryParam("version")}
+	modelMetadataResponse, err := client.grpc.ModelMetadata(ctx, &modelMetadataRequest)
 	if err != nil {
 		return err
 	}
 	return c.JSON(http.StatusOK, modelMetadataResponse)
+}
+
+// @Summary     Get model inference statistics
+// @Description It returns the requested model's inference statistics
+// @Accept      json
+// @Produce     json
+// @Param       model   query    string                  true  "model name"
+// @Param       version query    string                  false "model version"
+// @Success     200     {object} ModelStatisticsResponse "Triton server's model statistics"
+// @Router      /model-stats [get]
+func getModelInferStats(c echo.Context) error {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(flags.TIMEOUT)*time.Second)
+	defer cancel()
+
+	modelStatisticsRequest := ModelStatisticsRequest{Name: c.QueryParam("model"), Version: c.QueryParam("version")}
+	modelStatisticsResponse, err := client.grpc.ModelStatistics(ctx, &modelStatisticsRequest)
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, modelStatisticsResponse)
 }

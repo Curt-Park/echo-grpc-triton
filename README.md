@@ -2,6 +2,7 @@
 A simple API server for Triton inference server powered by echo and gRPC.
 
 ## Prerequisites
+- Install [docekr](https://docs.docker.com/engine/install/).
 - Install [go](https://go.dev/doc/install).
 
 ## Commands

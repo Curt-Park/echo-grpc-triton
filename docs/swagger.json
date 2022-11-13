@@ -82,6 +82,41 @@
                 }
             }
         },
+        "/model-stats": {
+            "get": {
+                "description": "It returns the requested model's inference statistics",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get model inference statistics",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "model name",
+                        "name": "model",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "model version",
+                        "name": "version",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Triton server's model statistics",
+                        "schema": {
+                            "$ref": "#/definitions/main.ModelStatisticsResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/readiness": {
             "get": {
                 "description": "It returns true if the triton server is ready",
@@ -104,6 +139,64 @@
         }
     },
     "definitions": {
+        "main.InferBatchStatistics": {
+            "type": "object",
+            "properties": {
+                "batch_size": {
+                    "description": "@@ .. cpp:var:: uint64 batch_size\n@@\n@@ The size of the batch.\n@@",
+                    "type": "integer"
+                },
+                "compute_infer": {
+                    "description": "@@ .. cpp:var:: StatisticDuration compute_infer\n@@\n@@ The count and cumulative duration to execute the model with the given\n@@ batch size.\n@@",
+                    "$ref": "#/definitions/main.StatisticDuration"
+                },
+                "compute_input": {
+                    "description": "@@ .. cpp:var:: StatisticDuration compute_input\n@@\n@@ The count and cumulative duration to prepare input tensor data as\n@@ required by the model framework / backend with the given batch size.\n@@ For example, this duration should include the time to copy input\n@@ tensor data to the GPU.\n@@",
+                    "$ref": "#/definitions/main.StatisticDuration"
+                },
+                "compute_output": {
+                    "description": "@@ .. cpp:var:: StatisticDuration compute_output\n@@\n@@ The count and cumulative duration to extract output tensor data\n@@ produced by the model framework / backend with the given batch size.\n@@ For example, this duration should include the time to copy output\n@@ tensor data from the GPU.\n@@",
+                    "$ref": "#/definitions/main.StatisticDuration"
+                }
+            }
+        },
+        "main.InferStatistics": {
+            "type": "object",
+            "properties": {
+                "cache_hit": {
+                    "description": "@@ .. cpp:var:: StatisticDuration cache_hit\n@@\n@@ The count of response cache hits and cumulative duration to lookup\n@@ and extract output tensor data from the Response Cache on a cache\n@@ hit. For example, this duration should include the time to copy\n@@ output tensor data from the Response Cache to the response object.\n@@ On cache hits, triton does not need to go to the model/backend\n@@ for the output tensor data, so the \"compute_input\", \"compute_infer\",\n@@ and \"compute_output\" fields are not updated. Assuming the response\n@@ cache is enabled for a given model, a cache hit occurs for a\n@@ request to that model when the request metadata (model name,\n@@ model version, model inputs) hashes to an existing entry in the\n@@ cache. On a cache miss, the request hash and response output tensor\n@@ data is added to the cache. See response cache docs for more info:\n@@ https://github.com/triton-inference-server/server/blob/main/docs/response_cache.md\n@@",
+                    "$ref": "#/definitions/main.StatisticDuration"
+                },
+                "cache_miss": {
+                    "description": "@@ .. cpp:var:: StatisticDuration cache_miss\n@@\n@@ The count of response cache misses and cumulative duration to lookup\n@@ and insert output tensor data from the computed response to the cache.\n@@ For example, this duration should include the time to copy\n@@ output tensor data from the response object to the Response Cache.\n@@ Assuming the response cache is enabled for a given model, a cache\n@@ miss occurs for a request to that model when the request metadata\n@@ does NOT hash to an existing entry in the cache. See the response\n@@ cache docs for more info:\n@@ https://github.com/triton-inference-server/server/blob/main/docs/response_cache.md\n@@",
+                    "$ref": "#/definitions/main.StatisticDuration"
+                },
+                "compute_infer": {
+                    "description": "@@ .. cpp:var:: StatisticDuration compute_infer\n@@\n@@ The count and cumulative duration to execute the model.\n@@ The \"compute_infer\" count and cumulative duration do not account for\n@@ requests that were a cache hit. See the \"cache_hit\" field for more\n@@ info.\n@@",
+                    "$ref": "#/definitions/main.StatisticDuration"
+                },
+                "compute_input": {
+                    "description": "@@ .. cpp:var:: StatisticDuration compute_input\n@@\n@@ The count and cumulative duration to prepare input tensor data as\n@@ required by the model framework / backend. For example, this duration\n@@ should include the time to copy input tensor data to the GPU.\n@@ The \"compute_input\" count and cumulative duration do not account for\n@@ requests that were a cache hit. See the \"cache_hit\" field for more\n@@ info.\n@@",
+                    "$ref": "#/definitions/main.StatisticDuration"
+                },
+                "compute_output": {
+                    "description": "@@ .. cpp:var:: StatisticDuration compute_output\n@@\n@@ The count and cumulative duration to extract output tensor data\n@@ produced by the model framework / backend. For example, this duration\n@@ should include the time to copy output tensor data from the GPU.\n@@ The \"compute_output\" count and cumulative duration do not account for\n@@ requests that were a cache hit. See the \"cache_hit\" field for more\n@@ info.\n@@",
+                    "$ref": "#/definitions/main.StatisticDuration"
+                },
+                "fail": {
+                    "description": "@@ .. cpp:var:: StatisticDuration fail\n@@\n@@ Cumulative count and duration for failed inference\n@@ request.\n@@",
+                    "$ref": "#/definitions/main.StatisticDuration"
+                },
+                "queue": {
+                    "description": "@@ .. cpp:var:: StatisticDuration queue\n@@\n@@ The count and cumulative duration that inference requests wait in\n@@ scheduling or other queues. The \"queue\" count and cumulative\n@@ duration includes cache hits.\n@@",
+                    "$ref": "#/definitions/main.StatisticDuration"
+                },
+                "success": {
+                    "description": "@@ .. cpp:var:: StatisticDuration success\n@@\n@@ Cumulative count and duration for successful inference\n@@ request. The \"success\" count and cumulative duration includes\n@@ cache hits.\n@@",
+                    "$ref": "#/definitions/main.StatisticDuration"
+                }
+            }
+        },
         "main.ModelMetadataResponse": {
             "type": "object",
             "properties": {
@@ -155,6 +248,67 @@
                     "items": {
                         "type": "integer"
                     }
+                }
+            }
+        },
+        "main.ModelStatistics": {
+            "type": "object",
+            "properties": {
+                "batch_stats": {
+                    "description": "@@ .. cpp:var:: InferBatchStatistics batch_stats (repeated)\n@@\n@@ The aggregate statistics for each different batch size that is\n@@ executed in the model. The batch statistics indicate how many actual\n@@ model executions were performed and show differences due to different\n@@ batch size (for example, larger batches typically take longer to\n@@ compute).\n@@",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.InferBatchStatistics"
+                    }
+                },
+                "execution_count": {
+                    "description": "@@ .. cpp:var:: uint64 last_inference\n@@\n@@ The cumulative count of the number of successful inference executions\n@@ performed for the model. When dynamic batching is enabled, a single\n@@ model execution can perform inferencing for more than one inference\n@@ request. For example, if a clients sends 64 individual requests each\n@@ with batch size 1 and the dynamic batcher batches them into a single\n@@ large batch for model execution then \"execution_count\" will be\n@@ incremented by 1. If, on the other hand, the dynamic batcher is not\n@@ enabled for that each of the 64 individual requests is executed\n@@ independently, then \"execution_count\" will be incremented by 64.\n@@ The \"execution_count\" value DOES NOT include cache hits.\n@@",
+                    "type": "integer"
+                },
+                "inference_count": {
+                    "description": "@@ .. cpp:var:: uint64 last_inference\n@@\n@@ The cumulative count of successful inference requests made for this\n@@ model. Each inference in a batched request is counted as an\n@@ individual inference. For example, if a client sends a single\n@@ inference request with batch size 64, \"inference_count\" will be\n@@ incremented by 64. Similarly, if a clients sends 64 individual\n@@ requests each with batch size 1, \"inference_count\" will be\n@@ incremented by 64. The \"inference_count\" value DOES NOT include\n@@ cache hits.\n@@",
+                    "type": "integer"
+                },
+                "inference_stats": {
+                    "description": "@@ .. cpp:var:: InferStatistics inference_stats\n@@\n@@ The aggregate statistics for the model/version.\n@@",
+                    "$ref": "#/definitions/main.InferStatistics"
+                },
+                "last_inference": {
+                    "description": "@@ .. cpp:var:: uint64 last_inference\n@@\n@@ The timestamp of the last inference request made for this model,\n@@ as milliseconds since the epoch.\n@@",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "@@ .. cpp:var:: string name\n@@\n@@ The name of the model. If not given returns statistics for all\n@@",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "@@ .. cpp:var:: string version\n@@\n@@ The version of the model.\n@@",
+                    "type": "string"
+                }
+            }
+        },
+        "main.ModelStatisticsResponse": {
+            "type": "object",
+            "properties": {
+                "model_stats": {
+                    "description": "@@ .. cpp:var:: ModelStatistics model_stats (repeated)\n@@\n@@ Statistics for each requested model.\n@@",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.ModelStatistics"
+                    }
+                }
+            }
+        },
+        "main.StatisticDuration": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "description": "@@ .. cpp:var:: uint64 count\n@@\n@@ Cumulative number of times this metric occurred.\n@@",
+                    "type": "integer"
+                },
+                "ns": {
+                    "description": "@@ .. cpp:var:: uint64 total_time_ns\n@@\n@@ Total collected duration of this metric in nanoseconds.\n@@",
+                    "type": "integer"
                 }
             }
         }
