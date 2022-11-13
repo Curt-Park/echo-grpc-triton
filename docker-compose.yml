@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  ################
+  # inference
+  ################
+  tritonserver:
+    image: nvcr.io/nvidia/tritonserver:22.09-py3
+    container_name: tritonserver
+    command: tritonserver --model-repository=/models
+    ports:
+      - 8000:8000
+      - 8001:8001
+      - 8002:8002
+    volumes:
+      - ./models:/models
+
+  ################
+  # api
+  ################
+  tritonapi:
+    build: .
+    container_name: tritonapi
+    entrypoint:
+      - /grpc_service.pb
+      - -u
+      - tritonserver:8001
+    ports:
+      - 8080:8080
+    depends_on:
+      - tritonserver
