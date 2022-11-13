@@ -2,5 +2,44 @@ info:
   contact:
     email: www.jwpark.co.kr@gmail.com
     name: Curt-Park
-paths: {}
+paths:
+  /:
+    get:
+      consumes:
+      - application/json
+      description: It returns true if the api server is alive
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: API server's liveness
+          schema:
+            type: boolean
+      summary: Healthcheck
+  /is-server-live:
+    get:
+      consumes:
+      - application/json
+      description: It returns true if the triton server is alive
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Triton server's liveness
+          schema:
+            type: boolean
+      summary: Check Triton's liveness
+  /is-server-ready:
+    get:
+      consumes:
+      - application/json
+      description: It returns true if the triton server is ready
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Triton server's readiness
+          schema:
+            type: boolean
+      summary: Check Triton's Readiness
 swagger: "2.0"

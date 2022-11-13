@@ -18,7 +18,68 @@ const docTemplate = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {
+        "/": {
+            "get": {
+                "description": "It returns true if the api server is alive",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Healthcheck",
+                "responses": {
+                    "200": {
+                        "description": "API server's liveness",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
+        "/is-server-live": {
+            "get": {
+                "description": "It returns true if the triton server is alive",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Check Triton's liveness",
+                "responses": {
+                    "200": {
+                        "description": "Triton server's liveness",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
+        "/is-server-ready": {
+            "get": {
+                "description": "It returns true if the triton server is ready",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Check Triton's Readiness",
+                "responses": {
+                    "200": {
+                        "description": "Triton server's readiness",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        }
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
