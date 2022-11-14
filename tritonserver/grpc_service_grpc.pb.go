@@ -4,7 +4,7 @@
 // - protoc             v3.21.9
 // source: grpc_service.proto
 
-package main
+package tritonserver
 
 import (
 	context "context"

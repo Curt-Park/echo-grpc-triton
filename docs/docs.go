@@ -75,7 +75,7 @@ const docTemplate = `{
                     "200": {
                         "description": "Triton server's inference response",
                         "schema": {
-                            "$ref": "#/definitions/main.ModelInferResponse"
+                            "$ref": "#/definitions/tritonserver.ModelInferResponse"
                         }
                     }
                 }
@@ -124,7 +124,7 @@ const docTemplate = `{
                     "200": {
                         "description": "Triton server's model load response",
                         "schema": {
-                            "$ref": "#/definitions/main.RepositoryModelLoadResponse"
+                            "$ref": "#/definitions/tritonserver.RepositoryModelLoadResponse"
                         }
                     }
                 }
@@ -159,7 +159,7 @@ const docTemplate = `{
                     "200": {
                         "description": "Triton server's model metadata",
                         "schema": {
-                            "$ref": "#/definitions/main.ModelMetadataResponse"
+                            "$ref": "#/definitions/tritonserver.ModelMetadataResponse"
                         }
                     }
                 }
@@ -194,7 +194,7 @@ const docTemplate = `{
                     "200": {
                         "description": "Triton server's model statistics",
                         "schema": {
-                            "$ref": "#/definitions/main.ModelStatisticsResponse"
+                            "$ref": "#/definitions/tritonserver.ModelStatisticsResponse"
                         }
                     }
                 }
@@ -223,7 +223,7 @@ const docTemplate = `{
                     "200": {
                         "description": "Triton server's model unload response",
                         "schema": {
-                            "$ref": "#/definitions/main.RepositoryModelUnloadResponse"
+                            "$ref": "#/definitions/tritonserver.RepositoryModelUnloadResponse"
                         }
                     }
                 }
@@ -251,7 +251,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "main.InferBatchStatistics": {
+        "tritonserver.InferBatchStatistics": {
             "type": "object",
             "properties": {
                 "batch_size": {
@@ -260,19 +260,19 @@ const docTemplate = `{
                 },
                 "compute_infer": {
                     "description": "@@ .. cpp:var:: StatisticDuration compute_infer\n@@\n@@ The count and cumulative duration to execute the model with the given\n@@ batch size.\n@@",
-                    "$ref": "#/definitions/main.StatisticDuration"
+                    "$ref": "#/definitions/tritonserver.StatisticDuration"
                 },
                 "compute_input": {
                     "description": "@@ .. cpp:var:: StatisticDuration compute_input\n@@\n@@ The count and cumulative duration to prepare input tensor data as\n@@ required by the model framework / backend with the given batch size.\n@@ For example, this duration should include the time to copy input\n@@ tensor data to the GPU.\n@@",
-                    "$ref": "#/definitions/main.StatisticDuration"
+                    "$ref": "#/definitions/tritonserver.StatisticDuration"
                 },
                 "compute_output": {
                     "description": "@@ .. cpp:var:: StatisticDuration compute_output\n@@\n@@ The count and cumulative duration to extract output tensor data\n@@ produced by the model framework / backend with the given batch size.\n@@ For example, this duration should include the time to copy output\n@@ tensor data from the GPU.\n@@",
-                    "$ref": "#/definitions/main.StatisticDuration"
+                    "$ref": "#/definitions/tritonserver.StatisticDuration"
                 }
             }
         },
-        "main.InferParameter": {
+        "tritonserver.InferParameter": {
             "type": "object",
             "properties": {
                 "parameterChoice": {
@@ -280,44 +280,44 @@ const docTemplate = `{
                 }
             }
         },
-        "main.InferStatistics": {
+        "tritonserver.InferStatistics": {
             "type": "object",
             "properties": {
                 "cache_hit": {
                     "description": "@@ .. cpp:var:: StatisticDuration cache_hit\n@@\n@@ The count of response cache hits and cumulative duration to lookup\n@@ and extract output tensor data from the Response Cache on a cache\n@@ hit. For example, this duration should include the time to copy\n@@ output tensor data from the Response Cache to the response object.\n@@ On cache hits, triton does not need to go to the model/backend\n@@ for the output tensor data, so the \"compute_input\", \"compute_infer\",\n@@ and \"compute_output\" fields are not updated. Assuming the response\n@@ cache is enabled for a given model, a cache hit occurs for a\n@@ request to that model when the request metadata (model name,\n@@ model version, model inputs) hashes to an existing entry in the\n@@ cache. On a cache miss, the request hash and response output tensor\n@@ data is added to the cache. See response cache docs for more info:\n@@ https://github.com/triton-inference-server/server/blob/main/docs/response_cache.md\n@@",
-                    "$ref": "#/definitions/main.StatisticDuration"
+                    "$ref": "#/definitions/tritonserver.StatisticDuration"
                 },
                 "cache_miss": {
                     "description": "@@ .. cpp:var:: StatisticDuration cache_miss\n@@\n@@ The count of response cache misses and cumulative duration to lookup\n@@ and insert output tensor data from the computed response to the cache.\n@@ For example, this duration should include the time to copy\n@@ output tensor data from the response object to the Response Cache.\n@@ Assuming the response cache is enabled for a given model, a cache\n@@ miss occurs for a request to that model when the request metadata\n@@ does NOT hash to an existing entry in the cache. See the response\n@@ cache docs for more info:\n@@ https://github.com/triton-inference-server/server/blob/main/docs/response_cache.md\n@@",
-                    "$ref": "#/definitions/main.StatisticDuration"
+                    "$ref": "#/definitions/tritonserver.StatisticDuration"
                 },
                 "compute_infer": {
                     "description": "@@ .. cpp:var:: StatisticDuration compute_infer\n@@\n@@ The count and cumulative duration to execute the model.\n@@ The \"compute_infer\" count and cumulative duration do not account for\n@@ requests that were a cache hit. See the \"cache_hit\" field for more\n@@ info.\n@@",
-                    "$ref": "#/definitions/main.StatisticDuration"
+                    "$ref": "#/definitions/tritonserver.StatisticDuration"
                 },
                 "compute_input": {
                     "description": "@@ .. cpp:var:: StatisticDuration compute_input\n@@\n@@ The count and cumulative duration to prepare input tensor data as\n@@ required by the model framework / backend. For example, this duration\n@@ should include the time to copy input tensor data to the GPU.\n@@ The \"compute_input\" count and cumulative duration do not account for\n@@ requests that were a cache hit. See the \"cache_hit\" field for more\n@@ info.\n@@",
-                    "$ref": "#/definitions/main.StatisticDuration"
+                    "$ref": "#/definitions/tritonserver.StatisticDuration"
                 },
                 "compute_output": {
                     "description": "@@ .. cpp:var:: StatisticDuration compute_output\n@@\n@@ The count and cumulative duration to extract output tensor data\n@@ produced by the model framework / backend. For example, this duration\n@@ should include the time to copy output tensor data from the GPU.\n@@ The \"compute_output\" count and cumulative duration do not account for\n@@ requests that were a cache hit. See the \"cache_hit\" field for more\n@@ info.\n@@",
-                    "$ref": "#/definitions/main.StatisticDuration"
+                    "$ref": "#/definitions/tritonserver.StatisticDuration"
                 },
                 "fail": {
                     "description": "@@ .. cpp:var:: StatisticDuration fail\n@@\n@@ Cumulative count and duration for failed inference\n@@ request.\n@@",
-                    "$ref": "#/definitions/main.StatisticDuration"
+                    "$ref": "#/definitions/tritonserver.StatisticDuration"
                 },
                 "queue": {
                     "description": "@@ .. cpp:var:: StatisticDuration queue\n@@\n@@ The count and cumulative duration that inference requests wait in\n@@ scheduling or other queues. The \"queue\" count and cumulative\n@@ duration includes cache hits.\n@@",
-                    "$ref": "#/definitions/main.StatisticDuration"
+                    "$ref": "#/definitions/tritonserver.StatisticDuration"
                 },
                 "success": {
                     "description": "@@ .. cpp:var:: StatisticDuration success\n@@\n@@ Cumulative count and duration for successful inference\n@@ request. The \"success\" count and cumulative duration includes\n@@ cache hits.\n@@",
-                    "$ref": "#/definitions/main.StatisticDuration"
+                    "$ref": "#/definitions/tritonserver.StatisticDuration"
                 }
             }
         },
-        "main.InferTensorContents": {
+        "tritonserver.InferTensorContents": {
             "type": "object",
             "properties": {
                 "bool_contents": {
@@ -381,7 +381,7 @@ const docTemplate = `{
                 }
             }
         },
-        "main.ModelInferResponse": {
+        "tritonserver.ModelInferResponse": {
             "type": "object",
             "properties": {
                 "id": {
@@ -400,14 +400,14 @@ const docTemplate = `{
                     "description": "@@\n@@ .. cpp:var:: InferOutputTensor outputs (repeated)\n@@\n@@ The output tensors holding inference results.\n@@",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/main.ModelInferResponse_InferOutputTensor"
+                        "$ref": "#/definitions/tritonserver.ModelInferResponse_InferOutputTensor"
                     }
                 },
                 "parameters": {
                     "description": "@@ .. cpp:var:: map\u003cstring,InferParameter\u003e parameters\n@@\n@@ Optional inference response parameters.\n@@",
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/definitions/main.InferParameter"
+                        "$ref": "#/definitions/tritonserver.InferParameter"
                     }
                 },
                 "raw_output_contents": {
@@ -422,12 +422,12 @@ const docTemplate = `{
                 }
             }
         },
-        "main.ModelInferResponse_InferOutputTensor": {
+        "tritonserver.ModelInferResponse_InferOutputTensor": {
             "type": "object",
             "properties": {
                 "contents": {
                     "description": "@@ .. cpp:var:: InferTensorContents contents\n@@\n@@ The tensor contents using a data-type format. This field\n@@ must not be specified if tensor contents are being specified\n@@ in ModelInferResponse.raw_output_contents.\n@@",
-                    "$ref": "#/definitions/main.InferTensorContents"
+                    "$ref": "#/definitions/tritonserver.InferTensorContents"
                 },
                 "datatype": {
                     "description": "@@\n@@ .. cpp:var:: string datatype\n@@\n@@ The tensor data type.\n@@",
@@ -441,7 +441,7 @@ const docTemplate = `{
                     "description": "@@ .. cpp:var:: map\u003cstring,InferParameter\u003e parameters\n@@\n@@ Optional output tensor parameters.\n@@",
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/definitions/main.InferParameter"
+                        "$ref": "#/definitions/tritonserver.InferParameter"
                     }
                 },
                 "shape": {
@@ -453,14 +453,14 @@ const docTemplate = `{
                 }
             }
         },
-        "main.ModelMetadataResponse": {
+        "tritonserver.ModelMetadataResponse": {
             "type": "object",
             "properties": {
                 "inputs": {
                     "description": "@@\n@@ .. cpp:var:: TensorMetadata inputs (repeated)\n@@\n@@ The model's inputs.\n@@",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/main.ModelMetadataResponse_TensorMetadata"
+                        "$ref": "#/definitions/tritonserver.ModelMetadataResponse_TensorMetadata"
                     }
                 },
                 "name": {
@@ -471,7 +471,7 @@ const docTemplate = `{
                     "description": "@@\n@@ .. cpp:var:: TensorMetadata outputs (repeated)\n@@\n@@ The model's outputs.\n@@",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/main.ModelMetadataResponse_TensorMetadata"
+                        "$ref": "#/definitions/tritonserver.ModelMetadataResponse_TensorMetadata"
                     }
                 },
                 "platform": {
@@ -487,7 +487,7 @@ const docTemplate = `{
                 }
             }
         },
-        "main.ModelMetadataResponse_TensorMetadata": {
+        "tritonserver.ModelMetadataResponse_TensorMetadata": {
             "type": "object",
             "properties": {
                 "datatype": {
@@ -507,14 +507,14 @@ const docTemplate = `{
                 }
             }
         },
-        "main.ModelStatistics": {
+        "tritonserver.ModelStatistics": {
             "type": "object",
             "properties": {
                 "batch_stats": {
                     "description": "@@ .. cpp:var:: InferBatchStatistics batch_stats (repeated)\n@@\n@@ The aggregate statistics for each different batch size that is\n@@ executed in the model. The batch statistics indicate how many actual\n@@ model executions were performed and show differences due to different\n@@ batch size (for example, larger batches typically take longer to\n@@ compute).\n@@",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/main.InferBatchStatistics"
+                        "$ref": "#/definitions/tritonserver.InferBatchStatistics"
                     }
                 },
                 "execution_count": {
@@ -527,7 +527,7 @@ const docTemplate = `{
                 },
                 "inference_stats": {
                     "description": "@@ .. cpp:var:: InferStatistics inference_stats\n@@\n@@ The aggregate statistics for the model/version.\n@@",
-                    "$ref": "#/definitions/main.InferStatistics"
+                    "$ref": "#/definitions/tritonserver.InferStatistics"
                 },
                 "last_inference": {
                     "description": "@@ .. cpp:var:: uint64 last_inference\n@@\n@@ The timestamp of the last inference request made for this model,\n@@ as milliseconds since the epoch.\n@@",
@@ -543,25 +543,25 @@ const docTemplate = `{
                 }
             }
         },
-        "main.ModelStatisticsResponse": {
+        "tritonserver.ModelStatisticsResponse": {
             "type": "object",
             "properties": {
                 "model_stats": {
                     "description": "@@ .. cpp:var:: ModelStatistics model_stats (repeated)\n@@\n@@ Statistics for each requested model.\n@@",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/main.ModelStatistics"
+                        "$ref": "#/definitions/tritonserver.ModelStatistics"
                     }
                 }
             }
         },
-        "main.RepositoryModelLoadResponse": {
+        "tritonserver.RepositoryModelLoadResponse": {
             "type": "object"
         },
-        "main.RepositoryModelUnloadResponse": {
+        "tritonserver.RepositoryModelUnloadResponse": {
             "type": "object"
         },
-        "main.StatisticDuration": {
+        "tritonserver.StatisticDuration": {
             "type": "object",
             "properties": {
                 "count": {

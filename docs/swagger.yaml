@@ -1,5 +1,5 @@
 definitions:
-  main.InferBatchStatistics:
+  tritonserver.InferBatchStatistics:
     properties:
       batch_size:
         description: |-
@@ -9,7 +9,7 @@ definitions:
           @@
         type: integer
       compute_infer:
-        $ref: '#/definitions/main.StatisticDuration'
+        $ref: '#/definitions/tritonserver.StatisticDuration'
         description: |-
           @@ .. cpp:var:: StatisticDuration compute_infer
           @@
@@ -17,7 +17,7 @@ definitions:
           @@ batch size.
           @@
       compute_input:
-        $ref: '#/definitions/main.StatisticDuration'
+        $ref: '#/definitions/tritonserver.StatisticDuration'
         description: |-
           @@ .. cpp:var:: StatisticDuration compute_input
           @@
@@ -27,7 +27,7 @@ definitions:
           @@ tensor data to the GPU.
           @@
       compute_output:
-        $ref: '#/definitions/main.StatisticDuration'
+        $ref: '#/definitions/tritonserver.StatisticDuration'
         description: |-
           @@ .. cpp:var:: StatisticDuration compute_output
           @@
@@ -37,17 +37,17 @@ definitions:
           @@ tensor data from the GPU.
           @@
     type: object
-  main.InferParameter:
+  tritonserver.InferParameter:
     properties:
       parameterChoice:
         description: "@@ .. cpp:var:: oneof parameter_choice\n@@\n@@ The parameter
           value can be a string, an int64 or\n@@ a boolean\n@@\n\nTypes that are assignable
           to ParameterChoice:\n\n\t*InferParameter_BoolParam\n\t*InferParameter_Int64Param\n\t*InferParameter_StringParam"
     type: object
-  main.InferStatistics:
+  tritonserver.InferStatistics:
     properties:
       cache_hit:
-        $ref: '#/definitions/main.StatisticDuration'
+        $ref: '#/definitions/tritonserver.StatisticDuration'
         description: |-
           @@ .. cpp:var:: StatisticDuration cache_hit
           @@
@@ -66,7 +66,7 @@ definitions:
           @@ https://github.com/triton-inference-server/server/blob/main/docs/response_cache.md
           @@
       cache_miss:
-        $ref: '#/definitions/main.StatisticDuration'
+        $ref: '#/definitions/tritonserver.StatisticDuration'
         description: |-
           @@ .. cpp:var:: StatisticDuration cache_miss
           @@
@@ -81,7 +81,7 @@ definitions:
           @@ https://github.com/triton-inference-server/server/blob/main/docs/response_cache.md
           @@
       compute_infer:
-        $ref: '#/definitions/main.StatisticDuration'
+        $ref: '#/definitions/tritonserver.StatisticDuration'
         description: |-
           @@ .. cpp:var:: StatisticDuration compute_infer
           @@
@@ -91,7 +91,7 @@ definitions:
           @@ info.
           @@
       compute_input:
-        $ref: '#/definitions/main.StatisticDuration'
+        $ref: '#/definitions/tritonserver.StatisticDuration'
         description: |-
           @@ .. cpp:var:: StatisticDuration compute_input
           @@
@@ -103,7 +103,7 @@ definitions:
           @@ info.
           @@
       compute_output:
-        $ref: '#/definitions/main.StatisticDuration'
+        $ref: '#/definitions/tritonserver.StatisticDuration'
         description: |-
           @@ .. cpp:var:: StatisticDuration compute_output
           @@
@@ -115,7 +115,7 @@ definitions:
           @@ info.
           @@
       fail:
-        $ref: '#/definitions/main.StatisticDuration'
+        $ref: '#/definitions/tritonserver.StatisticDuration'
         description: |-
           @@ .. cpp:var:: StatisticDuration fail
           @@
@@ -123,7 +123,7 @@ definitions:
           @@ request.
           @@
       queue:
-        $ref: '#/definitions/main.StatisticDuration'
+        $ref: '#/definitions/tritonserver.StatisticDuration'
         description: |-
           @@ .. cpp:var:: StatisticDuration queue
           @@
@@ -132,7 +132,7 @@ definitions:
           @@ duration includes cache hits.
           @@
       success:
-        $ref: '#/definitions/main.StatisticDuration'
+        $ref: '#/definitions/tritonserver.StatisticDuration'
         description: |-
           @@ .. cpp:var:: StatisticDuration success
           @@
@@ -141,7 +141,7 @@ definitions:
           @@ cache hits.
           @@
     type: object
-  main.InferTensorContents:
+  tritonserver.InferTensorContents:
     properties:
       bool_contents:
         description: |-
@@ -244,7 +244,7 @@ definitions:
           type: integer
         type: array
     type: object
-  main.ModelInferResponse:
+  tritonserver.ModelInferResponse:
     properties:
       id:
         description: |-
@@ -275,11 +275,11 @@ definitions:
           @@ The output tensors holding inference results.
           @@
         items:
-          $ref: '#/definitions/main.ModelInferResponse_InferOutputTensor'
+          $ref: '#/definitions/tritonserver.ModelInferResponse_InferOutputTensor'
         type: array
       parameters:
         additionalProperties:
-          $ref: '#/definitions/main.InferParameter'
+          $ref: '#/definitions/tritonserver.InferParameter'
         description: |-
           @@ .. cpp:var:: map<string,InferParameter> parameters
           @@
@@ -317,10 +317,10 @@ definitions:
           type: array
         type: array
     type: object
-  main.ModelInferResponse_InferOutputTensor:
+  tritonserver.ModelInferResponse_InferOutputTensor:
     properties:
       contents:
-        $ref: '#/definitions/main.InferTensorContents'
+        $ref: '#/definitions/tritonserver.InferTensorContents'
         description: |-
           @@ .. cpp:var:: InferTensorContents contents
           @@
@@ -346,7 +346,7 @@ definitions:
         type: string
       parameters:
         additionalProperties:
-          $ref: '#/definitions/main.InferParameter'
+          $ref: '#/definitions/tritonserver.InferParameter'
         description: |-
           @@ .. cpp:var:: map<string,InferParameter> parameters
           @@
@@ -364,7 +364,7 @@ definitions:
           type: integer
         type: array
     type: object
-  main.ModelMetadataResponse:
+  tritonserver.ModelMetadataResponse:
     properties:
       inputs:
         description: |-
@@ -374,7 +374,7 @@ definitions:
           @@ The model's inputs.
           @@
         items:
-          $ref: '#/definitions/main.ModelMetadataResponse_TensorMetadata'
+          $ref: '#/definitions/tritonserver.ModelMetadataResponse_TensorMetadata'
         type: array
       name:
         description: |-
@@ -392,7 +392,7 @@ definitions:
           @@ The model's outputs.
           @@
         items:
-          $ref: '#/definitions/main.ModelMetadataResponse_TensorMetadata'
+          $ref: '#/definitions/tritonserver.ModelMetadataResponse_TensorMetadata'
         type: array
       platform:
         description: |-
@@ -413,7 +413,7 @@ definitions:
           type: string
         type: array
     type: object
-  main.ModelMetadataResponse_TensorMetadata:
+  tritonserver.ModelMetadataResponse_TensorMetadata:
     properties:
       datatype:
         description: |-
@@ -443,7 +443,7 @@ definitions:
           type: integer
         type: array
     type: object
-  main.ModelStatistics:
+  tritonserver.ModelStatistics:
     properties:
       batch_stats:
         description: |-
@@ -456,7 +456,7 @@ definitions:
           @@ compute).
           @@
         items:
-          $ref: '#/definitions/main.InferBatchStatistics'
+          $ref: '#/definitions/tritonserver.InferBatchStatistics'
         type: array
       execution_count:
         description: |-
@@ -489,7 +489,7 @@ definitions:
           @@
         type: integer
       inference_stats:
-        $ref: '#/definitions/main.InferStatistics'
+        $ref: '#/definitions/tritonserver.InferStatistics'
         description: |-
           @@ .. cpp:var:: InferStatistics inference_stats
           @@
@@ -518,7 +518,7 @@ definitions:
           @@
         type: string
     type: object
-  main.ModelStatisticsResponse:
+  tritonserver.ModelStatisticsResponse:
     properties:
       model_stats:
         description: |-
@@ -527,14 +527,14 @@ definitions:
           @@ Statistics for each requested model.
           @@
         items:
-          $ref: '#/definitions/main.ModelStatistics'
+          $ref: '#/definitions/tritonserver.ModelStatistics'
         type: array
     type: object
-  main.RepositoryModelLoadResponse:
+  tritonserver.RepositoryModelLoadResponse:
     type: object
-  main.RepositoryModelUnloadResponse:
+  tritonserver.RepositoryModelUnloadResponse:
     type: object
-  main.StatisticDuration:
+  tritonserver.StatisticDuration:
     properties:
       count:
         description: |-
@@ -596,7 +596,7 @@ paths:
         "200":
           description: Triton server's inference response
           schema:
-            $ref: '#/definitions/main.ModelInferResponse'
+            $ref: '#/definitions/tritonserver.ModelInferResponse'
       summary: Model inference api for the model with bytes a input and a bytes output.
   /liveness:
     get:
@@ -629,7 +629,7 @@ paths:
         "200":
           description: Triton server's model load response
           schema:
-            $ref: '#/definitions/main.RepositoryModelLoadResponse'
+            $ref: '#/definitions/tritonserver.RepositoryModelLoadResponse'
       summary: Load a model.
   /model-metadata:
     get:
@@ -652,7 +652,7 @@ paths:
         "200":
           description: Triton server's model metadata
           schema:
-            $ref: '#/definitions/main.ModelMetadataResponse'
+            $ref: '#/definitions/tritonserver.ModelMetadataResponse'
       summary: Get model metadata.
   /model-stats:
     get:
@@ -675,7 +675,7 @@ paths:
         "200":
           description: Triton server's model statistics
           schema:
-            $ref: '#/definitions/main.ModelStatisticsResponse'
+            $ref: '#/definitions/tritonserver.ModelStatisticsResponse'
       summary: Get model inference statistics.
   /model-unload:
     post:
@@ -695,7 +695,7 @@ paths:
         "200":
           description: Triton server's model unload response
           schema:
-            $ref: '#/definitions/main.RepositoryModelUnloadResponse'
+            $ref: '#/definitions/tritonserver.RepositoryModelUnloadResponse'
       summary: Unload a model.
   /readiness:
     get:

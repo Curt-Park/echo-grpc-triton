@@ -6,11 +6,11 @@ ENV GO111MODULE=on \
 
 WORKDIR /build
 COPY . .
-RUN go build *.go
+RUN go build main.go
 
 WORKDIR /dist
-RUN cp /build/grpc_service.pb .
+RUN cp /build/main .
 
 FROM scratch
-COPY --from=builder /dist/grpc_service.pb .
-ENTRYPOINT ["/grpc_service.pb"]
+COPY --from=builder /dist/main .
+ENTRYPOINT ["/main"]

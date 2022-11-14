@@ -30,7 +30,7 @@ syntax = "proto3";
 
 package inference;
 
-option go_package = "./";
+option go_package = "./tritonserver";
 
 //@@.. cpp:namespace:: inference
 

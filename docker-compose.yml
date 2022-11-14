@@ -22,7 +22,7 @@ services:
     build: .
     container_name: tritonapi
     entrypoint:
-      - /grpc_service.pb
+      - /main
       - -u
       - tritonserver:8001
     ports:

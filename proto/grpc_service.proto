@@ -30,7 +30,7 @@ package inference;
 
 //@@.. cpp:namespace:: inference
 
-option go_package = "./";
+option go_package = "./tritonserver";
 
 import "model_config.proto";
 
