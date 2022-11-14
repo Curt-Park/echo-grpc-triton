@@ -17,8 +17,6 @@ import (
 
 // Flags contains the information to send requests to Triton inference server.
 type Flags struct {
-	ModelName    string
-	ModelVersion string
 	URL          string
 	TIMEOUT      int64
 }
