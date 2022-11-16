@@ -10,26 +10,23 @@ import (
 	"time"
 )
 
-
 // Contexts that is necessary to communicate with Triton
 type GRPCInferenceServiceAPIClient interface {
-    GetServerLiveness(c echo.Context) error
-    GetServerReadiness(c echo.Context) error
-    GetModelMetadata(c echo.Context) error
-    GetModelInferStats(c echo.Context) error
-    LoadModel(c echo.Context) error
-    UnloadModel(c echo.Context) error
-    Infer(c echo.Context) error
+	GetServerLiveness(c echo.Context) error
+	GetServerReadiness(c echo.Context) error
+	GetModelMetadata(c echo.Context) error
+	GetModelInferStats(c echo.Context) error
+	LoadModel(c echo.Context) error
+	UnloadModel(c echo.Context) error
+	Infer(c echo.Context) error
 }
-
 
 // Contexts that is necessary to communicate with Triton
 type gRPCInferenceServiceAPIClient struct {
-	grpc GRPCInferenceServiceClient
-    url  string
-    timeout int64
+	grpc    GRPCInferenceServiceClient
+	url     string
+	timeout int64
 }
-
 
 // ConnectToTritonWithGRPC Create GRPC Connection
 func NewGRPCInferenceServiceAPIClient(url string, timeout int64) gRPCInferenceServiceAPIClient {
@@ -37,13 +34,12 @@ func NewGRPCInferenceServiceAPIClient(url string, timeout int64) gRPCInferenceSe
 	if err != nil {
 		log.Fatalf("couldn't connect to endpoint %s: %v", url, err)
 	}
-    client := gRPCInferenceServiceAPIClient{}
+	client := gRPCInferenceServiceAPIClient{}
 	client.grpc = NewGRPCInferenceServiceClient(conn)
-    client.url = url
-    client.timeout = timeout
-    return client
+	client.url = url
+	client.timeout = timeout
+	return client
 }
-
 
 // @Summary     Check Triton's liveness.
 // @Description It returns true if the triton server is alive.
@@ -51,7 +47,7 @@ func NewGRPCInferenceServiceAPIClient(url string, timeout int64) gRPCInferenceSe
 // @Produce     json
 // @Success     200 {object} bool "Triton server's liveness"
 // @Router      /liveness [get]
-func (client *gRPCInferenceServiceAPIClient)GetServerLiveness(c echo.Context) error {
+func (client *gRPCInferenceServiceAPIClient) GetServerLiveness(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(client.timeout)*time.Second)
 	defer cancel()
 
@@ -69,7 +65,7 @@ func (client *gRPCInferenceServiceAPIClient)GetServerLiveness(c echo.Context) er
 // @Produce     json
 // @Success     200 {object} bool "Triton server's readiness"
 // @Router      /readiness [get]
-func (client *gRPCInferenceServiceAPIClient)GetServerReadiness(c echo.Context) error {
+func (client *gRPCInferenceServiceAPIClient) GetServerReadiness(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(client.timeout)*time.Second)
 	defer cancel()
 
@@ -89,7 +85,7 @@ func (client *gRPCInferenceServiceAPIClient)GetServerReadiness(c echo.Context) e
 // @Param       version query    string                false "model version"
 // @Success     200     {object} ModelMetadataResponse "Triton server's model metadata"
 // @Router      /model-metadata [get]
-func (client *gRPCInferenceServiceAPIClient)GetModelMetadata(c echo.Context) error {
+func (client *gRPCInferenceServiceAPIClient) GetModelMetadata(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(client.timeout)*time.Second)
 	defer cancel()
 
@@ -109,7 +105,7 @@ func (client *gRPCInferenceServiceAPIClient)GetModelMetadata(c echo.Context) err
 // @Param       version query    string                  false "model version"
 // @Success     200     {object} ModelStatisticsResponse "Triton server's model statistics"
 // @Router      /model-stats [get]
-func (client *gRPCInferenceServiceAPIClient)GetModelInferStats(c echo.Context) error {
+func (client *gRPCInferenceServiceAPIClient) GetModelInferStats(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(client.timeout)*time.Second)
 	defer cancel()
 
@@ -128,7 +124,7 @@ func (client *gRPCInferenceServiceAPIClient)GetModelInferStats(c echo.Context) e
 // @Param       model query    string                      true "model name"
 // @Success     200   {object} RepositoryModelLoadResponse "Triton server's model load response"
 // @Router      /model-load [post]
-func (client *gRPCInferenceServiceAPIClient)LoadModel(c echo.Context) error {
+func (client *gRPCInferenceServiceAPIClient) LoadModel(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(client.timeout)*time.Second)
 	defer cancel()
 
@@ -147,7 +143,7 @@ func (client *gRPCInferenceServiceAPIClient)LoadModel(c echo.Context) error {
 // @Param       model query    string                        true "model name"
 // @Success     200   {object} RepositoryModelUnloadResponse "Triton server's model unload response"
 // @Router      /model-unload [post]
-func (client *gRPCInferenceServiceAPIClient)UnloadModel(c echo.Context) error {
+func (client *gRPCInferenceServiceAPIClient) UnloadModel(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(client.timeout)*time.Second)
 	defer cancel()
 
@@ -168,7 +164,7 @@ func (client *gRPCInferenceServiceAPIClient)UnloadModel(c echo.Context) error {
 // @Param       version formData string             false "model version"
 // @Success     200     {object} ModelInferResponse "Triton server's inference response"
 // @Router      /infer [post]
-func (client *gRPCInferenceServiceAPIClient)Infer(c echo.Context) error {
+func (client *gRPCInferenceServiceAPIClient) Infer(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(client.timeout)*time.Second)
 	defer cancel()
 
